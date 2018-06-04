@@ -1,0 +1,74 @@
+<?php
+
+	if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없으면 세션을 시작함
+	include 'db.php';
+
+	$pname = $_POST["pname"];
+	$goal = $_POST["goal"];
+	$maxpeople = (int)$_POST["maxPeople"];
+	$beginline = $_POST["beginline"];
+	$deadline = $_POST["deadline"];
+	$info = $_POST["info"];
+
+	if(empty($pname)){
+		?><script>alert("프로젝트 제목 누락!");location.replace("make_project.php");</script><?php
+	}elseif(empty($goal)){
+		?><script>alert("프로젝트 목표 누락!");location.replace("make_project.php");</script><?php
+	}elseif(empty($beginline)){
+		?><script>alert("프로젝트 시작날짜 누락!");location.replace("make_project.php");</script><?php
+	}elseif(empty($deadline)){
+		?><script>alert("프로젝트 종료날짜 누락!");location.replace("make_project.php");</script><?php
+	}elseif(empty($info)){
+		?><script>alert("프로젝트 설명 누락!");location.replace("make_project.php");</script><?php
+	}else{
+		$count_path = "/project/count";
+		$index = $firebase->get($count_path);
+		$index++;
+		$firebase->set($count_path,$index);
+
+		$user_count_path = "/users/".$_SESSION['id']."/project/count";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_isLeader_path = "/users/".$_SESSION['id']."/project/".$index."/isLeader";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_pname_path = "/users/".$_SESSION['id']."/project/".$index."/pname";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_index_path = "/users/".$_SESSION['id']."/project/".$index."/index";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+
+		$user_count = $firebase->get($user_count_path);
+		$user_count++;
+		$firebase->set($user_count_path,$user_count);
+
+		$firebase->set($user_isLeader_path, true);
+		$firebase->set($user_pname_path, $pname);
+		$firebase->set($user_index_path, $index);
+
+		$member_id_path = "/project/".$index."/member/".$_SESSION['id']."/id";	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
+		$member_isLeader_path = "/project/".$index."/member/".$_SESSION['id']."/isLeader";	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
+
+		$firebase->set($member_id_path, $_SESSION['id']);	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
+		$firebase->set($member_isLeader_path, true);
+
+		$pname_path = "/project/".$index."/pInfo/pname";
+		$goal_path = "/project/".$index."/pInfo/goal";
+		$maxpeople_path = "/project/".$index."/pInfo/maxpeople";
+		$numpeople_path = "/project/".$index."/pInfo/numpeople";
+		$beginline_path = "/project/".$index."/pInfo/beginline";
+		$deadline_path = "/project/".$index."/pInfo/deadline";
+		$info_path = "/project/".$index."/pInfo/info";
+		$leader_path = "/project/".$index."/pInfo/leader";
+		$status_path = "/project/".$index."/pInfo/status";
+		$index_path = "/project/".$index."/pInfo/index";
+			
+		$firebase->set($pname_path, $pname);
+		$firebase->set($goal_path, $goal);
+		$firebase->set($maxpeople_path, $maxpeople);
+		$firebase->set($numpeople_path, 1);
+		$firebase->set($beginline_path, $beginline);
+		$firebase->set($deadline_path, $deadline);
+		$firebase->set($info_path, $info);
+		$firebase->set($leader_path, $_SESSION['id']);	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
+		$firebase->set($status_path, "모집중");
+		$firebase->set($index_path, $index);
+
+		?><script>alert("프로젝트 생성 완료!"); location.replace("project_board.php");</script><?php
+	}
+
+
+?>

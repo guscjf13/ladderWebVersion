@@ -1,0 +1,102 @@
+<?php
+if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없으면 세션을 시작함
+?>
+<!DOCTYPE HTML>
+<html>
+	
+	<head>
+		<meta charset="UTF-8" \>
+		<style>
+		@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+		a {
+			text-decoration: none;
+			color: black;
+		}
+		body {
+			background: #C0C0C0;
+		}
+		#main_box {
+			background-color: #FFFFFF;
+			width: 800px;
+			height: 650px;
+			margin: 150px auto 0 auto;
+
+		}
+		#logo {
+			width: 800px; 
+			height: 300px;
+			display: block;
+			margin: 0 auto;
+			padding-top: 50px;
+			padding-bottom: 20px;
+			text-align: center;
+		}
+		#under_logo{
+			width: 800px;
+			height: 250px;
+			display: inline-block;
+			text-align: center;
+			margin: 10px auto;
+		}
+		#log_in{
+			width: 800px;
+		}
+		#id{
+			width: 250px;
+			height: 40px;
+			margin: 10px auto;
+		}
+		#password {
+			width: 250px;
+			height: 40px;
+		}
+		#submit {
+			width: 250px;
+			height: 40px;
+		}
+		#login_middle{
+			width: 800px;
+			height: 2px;
+		}
+		#log_in_input{
+			margin: 10px auto;
+			margin-top: 0;
+		}
+		#log_in_make_find pre {
+			font-size: 13pt
+		}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id=main_box>
+
+			<div id=logo>
+				<a href=login.html><img src=logo.png style="width: 30%; height: auto;" id="logo_img"></a>
+			</div>
+			
+			<div id="under_logo">
+				<div id=log_in>
+					<form action="login.php" method="post">
+						<div id=log_in_input>
+							<input id=id type=text  placeholder=" 아이디" name=id > 
+							<div id="login_middle"></div>
+							<input id=password type=password placeholder=" 비밀번호" name=passwd>
+						</div>
+						<div id=log_in_submit>
+							<input id=submit type=submit value=로그인>
+						</div>
+					</form> 
+				</div>
+				<div id=log_in_make_find>
+					<pre> <a href="log_in_make.php">  회원가입</a>     <a href="log_in_find.php"> ID/PW 찾기 </a> </pre>
+				</div>
+			</div>
+	
+		</div>
+	
+	</body>
+
+</html>

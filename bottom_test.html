@@ -1,0 +1,138 @@
+<head>
+<meta charset="utf-8">
+	<title></title>
+	<style>
+	* {font-family :  "Times New Roman", sans-serif; font-size:12px; margin: 0px; padding: 0px; transition:all 0.3s;background:rgba(0,0,0,0);}
+	input[type="radio"]{width:10px; height:10px; margin-left:5px;}
+	input[type="checkbox"]{width:10px; height:10px; margin-left:5px;}
+	a {text-decoration: none; color:black;}
+	li { list-style: none;}
+	h1 {color:rgb(50,200,200);}
+	h2 {color:rgb(230,255,240);}
+	h3 {color:rgb(200,220,220);}
+	input:hover{background-color: rgb(220,240,230) color:black;}
+	input:focus{background-color: rgb(220,240,230) color:black;}
+	td:hover{background-color: rgb(240,255,250) color:black;}
+	th:hover{background-color: rgb(240,255,250) color:black;}
+	/*sides size*/
+	body{width:100%; height:100%; min-height:750px; position:relative; overflow:auto; background-color: rgb(30,30,30);}
+	#upper-header{width:100%; height:35px; position:fixed; top:0px;}
+	#upper-side{width:100%; height:100px; margin-top:50px; background-color: rgb(20,20,20);}
+	#pwp{width:100%; height:402px; background-color: rgb(20,20,20)}
+	#page-wrapper{width:952px; height:402px; margin:12px auto;position:relative; overflow:hidden; background-color: rgb(20,20,20);}
+
+	#left-side{width:100px; height:375px; float:left; margin:4px 0px;}
+	#right-side{width:800px; height:375px; float:left; margin:4px 0px; margin-left: 25px;}
+	#lower-side{position:absolute; width:100%; height: 225px; bottom:0px;}
+
+	/*upper-header*/
+	#upper-header{background-color: rgb(50,150,130); z-index:1000;}
+	.upper-navs{width:800px; height:35px; margin:0px auto;}
+	.upper-nav1{display: block; width:150px; height:35px; float: right; color: white; font-size: 12px; line-height: 35px; text-align: center}
+	.upper-nav2{display: block; width:100px; height:35px; float: right; color: white; font-size: 12px; line-height: 35px; text-align: center}
+	.upper-title{display: block; width:150px; height:35px; float: left; color: white; font-size: 17px; line-height: 35px; text-align: center}
+	/*upper-side*/
+	.upper-side-box{width:750px; height:100px; margin:0px auto; position: relative}
+	.upper-img{position:absolute; width:500px; height:100px; left:0px; background-image: url("Fitness.jpg"); background-size: 100%;z-index:0;}
+	.upper-box{position:absolute; right:0px; width:750px; height:100px; background: linear-gradient(105deg, rgb(20,20,20), rgb(20,20,20) 30px, rgba(0,0,0,0) 30px,rgba(0,0,0,0) 400px, rgb(20,20,20) 400px); z-index:1;}
+	.upper-box-text{float:right; width:375px; height:75px; color : white; margin:12px 12px;}
+	.upper-box-text h1{width:375px; height:45px;font-size:40px; line-height: 50px; letter-spacing: 2px; text-align: right;float:right;}
+	.upper-box-text h2{width:250px; height:12px;font-size: 10px; text-align: right;line-height: 12px; float:right; margin-right:2px; letter-spacing: 5px}
+	.upper-box-text h3{width:250px; height:12px;font-size: 10px; text-align: right;line-height: 12px;float:right; margin-right:2px; letter-spacing: 5px}
+	/*lower-side*/
+	#lower-side{background-color: rgb(20,20,20); z-index:1000;}
+	.lower-box{width:625px; height:200px;overflow: hidden; margin:0px auto;}
+	.lower-box h3{display: black; width:500px;  margin:25px auto; height:25px; font-size: 12px; line-height: 25px; text-align: center; letter-spacing: 7px}
+	.lower-box h1{display:block; width:162px; height: 14px; font-size:13px; margin-bottom:7px;}
+	.lower-box h2{display:block; width:162px; height: 11px; font-size:10px; margin-bottom:5px; letter-spacing: 1px}
+	.lower-box div{width:162px; height:162px; margin:0px 21px; float:left;}
+	.maker h2{letter-spacing: 2px}
+	.logo {display:block; background-image:url("KonkukLogo.png"); background-size:150px;}
+	/*left-side*/
+
+	#nav{width:97px; height:375px; margin:50px 0px; margin-left:10px; font-size: 4px;}
+	#nav>a{display:block; width:87px; height:25px; color:white; font-size: 12px; margin:12px 0px; margin-left: 7px; line-height:25px; position:relative; background-color: rgb(50,150,130); text-align: center; border-radius: 11px 0;}
+	#nav>a>div{position:absolute; display:black; font-size:0px; width:0px; height:25px; left:87px; color:rgba(0,0,0,0); border-radius: 0 0 11px 0;}
+	#nav>a:nth-of-type(n):hover{background-color: rgba(60,60,60,0.8); border-radius: 11px 0 0 0; margin-left:2px; color:rgb(50,200,200);;}
+	#nav>a:nth-of-type(n):hover>div{background-color: rgba(60,60,60,0.8); color:white; width:250px; text-align: center;  font-size:10px; }
+	/*right-side*/
+	.right-side-box{width:600px; padding : 0px 10px; margin-top:25px; padding:0px 75px; height:350px; background-color: white; overflow: auto; border-radius: 25px; overflow: auto; }
+	.right-side-box h1{display:block; width:250px; margin:7px auto; height: 15px; font-size:12px; text-align: center;}
+	.flash{width:250px; height:25px; margin:12px auto; text-align: center;}
+	.right-side-box table{width:590px; float: left; border:1px solid grey; border-left: none; border-right: none}
+	.right-side-box th{height:25px; border:none; border-top:1px dotted grey;}
+	.right-side-box td{height:25px; border:none; border-top:1px dotted grey;}
+	.right-side-box input[type="button"]{margin-left:5px; width: 75px; height:30px; float: left; line-height: 30px}
+	.right-side-box input[type="submit"]{margin-right:5px; width: 75px; height:30px; float: right; line-height: 30px}
+	.right-side-box input[type="reset"]{margin-left:5px; width: 75px; height:30px; float: left; line-height: 30px}
+</style>
+</head>
+<body>
+<div id="upper-header">
+<div class="upper-navs">
+<a class="upper-nav2" href="logout.php">logout</a>
+<div class="upper-nav1"><?=$_SESSION['ID']?>님, 환영합니다!</div>
+<a class="upper-title" href=<?
+ if($_SESSION['level']==3)echo "\"admin_main.html\"";
+ if($_SESSION['level']==2)echo "\"trainer_main.html\"";
+ if($_SESSION['level']==1)echo "\"user_main.html\"";
+?>>YOUR HEALTH</a>
+</div>
+</div><!--upper-header-->
+
+<div id="upper-side">
+	<div class="upper-side-box">
+	<div class="upper-img"></div>
+	<div class="upper-box">
+		<div class="upper-box-text">
+			<h1>YOUR HEALTH</h1>
+			<h2>건대새천년관지점</h2>
+			<h3>TEL. 02-222-2222</h3>
+		</div>
+	</div>
+	</div>
+</div><!--upper-side-->
+
+<div id="pwp">
+
+<div id="page-wrapper">
+<div id="left-side">
+<div id=nav>
+	<?include("nav.php");?>
+</div>
+</div><!--left-side-->
+
+<div id=right-side>
+<div class="right-side-box">
+<div class="flash"><?=$_SESSION['flash']?></div>
+</div>
+</div> <!--right-side-->
+</div> <!--page-wrapper-->
+</div>
+<div id="lower-side">
+<div class="lower-box">
+<h3>2017 WEB PROGRAMMING</h3>
+<div class="info">
+<h1>INFOMATION</h1>
+<h2>2017 WEB PROGRAMING</h2>
+<h2>TEAM PROJECT</h2>
+<h2>YOUR HEALTH</h2>
+<h2>POSTED 2017-05-11</h2>
+<h2>DUE 2017-06-13</h2>
+<h2>PRESENTATION 2017-06-14</h2>
+</div>
+<div class="maker">
+<h1>MAKERS</h1>
+<h2>소프트웨어학과</h2>
+<h2>201411187 강석원</h2>
+<h2>201411194 김대엽</h2>
+<h2>201411221 이강호</h2>
+<h2>환경공학과</h2>
+<h2>201310806 전인운</h2>
+</div>
+<div class="logo">
+</div>
+</div>
+</div><!--lower-side-->
+</body>
+ <!---->
