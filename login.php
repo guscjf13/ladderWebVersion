@@ -25,18 +25,17 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 				?>
 				<script> location.replace("main_not_joined.php") </script>
 				<?php
-
-			}
-			elseif($_SESSION['count'] == 1){
-				
-				?>
-				<script> location.replace("main_joined.php") </script>
-				<?php
 			}else{
 				?>
 				<script> location.replace("project_list.php") </script>
 				<?php
 			}
+			//elseif($_SESSION['count'] == 1){
+			//	$path = "/users/".$_SESSION['id']."/project";
+			//	$index = explode("\"", $firebase->get($path))[1];
+			//	$path = "users/".$_SESSION['id']."/project/".$index."/index";
+			//	$index = $firebase->get($path);
+			//}
 
 		}
 		else

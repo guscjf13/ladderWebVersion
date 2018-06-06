@@ -35,6 +35,13 @@
 table {
     margin: 50px auto;
 }
+#make_project{
+    position: relative;
+}
+#make_project a{
+    position: absolute;
+    right: 50%;
+}
 </style>
 
  </head>
@@ -51,7 +58,7 @@ include "top_menu.php";
     	<tr>
         	<th width="60">번호</th>
             <th width="400">프로젝트 이름</th>
-            <th width="200">목적</th>
+            <th width="200">목표</th>
             <th width="80">인원</th>
             <th width="100">팀장</th>
             <th width="200">기간</th>
@@ -90,22 +97,46 @@ include "top_menu.php";
                 $dead = $firebase->get($dead_path);
                 $status = $firebase->get($status_path);
 
-                $pname = explode("\"", $pname);
-                $goal = explode("\"", $goal);
-                $leader = explode("\"", $leader);
-                $begin = explode("\"", $begin);
-                $dead = explode("\"", $dead);
-                $status = explode("\"", $status);
+                $pname = explode("\"", $pname)[1];
+                $goal = explode("\"", $goal)[1];
+                $leader = explode("\"", $leader)[1];
+                $begin = explode("\"", $begin)[1];
+                $dead = explode("\"", $dead)[1];
+                $status = explode("\"", $status)[1];
+
+                $id = $_SESSION['id'];
+                $signup_path = "/check/signup/".$i."/id/".$id;
+                $signup = $firebase->get($signup_path);
+
+                $ucount_path = "/users/".$id."/project/count";
+                $ucount = $firebase->get($ucount_path);
+                $flag = 0;
+                for($m=1;$m<=$ucount;$m++){
+                    $joined_path = "/users/".$id."/project/".$m."/index";
+                    $joined = $firebase->get($joined_path);
+                    if($joined == $index){
+                        $flag = 1;
+                        break;
+                    }
+                }
 			?>
 	<tbody>
 		<tr>
             <td width="60"><?php echo $index; ?></td>
-            <td width="400"><?php echo $pname[1]; ?></td>
-            <td width="200"><?php echo $goal[1]; ?></td>
+            <td width="400"><a href="project_board_show.php?index=<?php echo $index?>"><?php echo $pname; ?></a></td> <!-- 여기서 <a>태그로 request 방식으로 project_board_show.php 로 $index 넘겨줌-->
+            <td width="200"><?php echo $goal; ?></td>
             <td width="80"><?php echo $nump; ?>/<?php echo $maxp; ?></td>
-            <td width="100"><?php echo $leader[1]; ?></td>
-            <td width="200"><?php echo $begin[1]; ?>&nbsp~&nbsp<?php echo $dead[1]; ?></td>
-            <td width="100"><?php echo $status[1]; ?></td>
+            <td width="100"><?php echo $leader; ?></td>
+            <td width="200"><?php echo $begin; ?>&nbsp~&nbsp<?php echo $dead; ?></td>
+            <?php if($signup == 1){?>
+            <td width="100" style="text-decoration-color: green;">신청중</td>
+            <?php }elseif($id == $leader){?>
+            <td width="100" style="text-decoration-color: green;">팀장</td>
+            <?php }elseif($flag == 1){?>
+            <td width="100" style="text-decoration-color: green;">참가중</td>
+            <?php }else{?>
+            <td width="100"><?php echo $status; ?></td>
+            <?php }?>
         </tr>
 	</tbody>
 <?php
@@ -114,7 +145,10 @@ include "top_menu.php";
     }
 ?>
 </table>
-<a href=make_project.php><input type="button" name="write_btn" value="프로젝트 생성"/></a>
+<div id="make_project">
+    <a href=make_project.php><input type="button" name="write_btn" value="프로젝트 생성"/></a>
+</div>
+
 
  </body>
  </div>
