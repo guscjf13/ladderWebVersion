@@ -1,5 +1,3 @@
-<?php if(!isset($_SESSION)){session_start();}?>
-
 <style>
 		#error_card_total {
 			width: 1550px;
@@ -81,7 +79,6 @@
             		<label for=error_card_radio> 
 						<!-- 여기서 for문으로 오류 개수만큼 만들기-->
 						<?php
-						// 이거 만들 때 radio 하나씩 만들어주고 value로 issue index 넘겨주면 그에 해당하는 세부사항 볼 수 있을거같은데?!
 						for($i=1;$i<=$count;$i++){
 							$iname_path = "/project/".$index."/issue/".$i."/iname";
 							$urgency_path = "/project/".$index."/issue/".$i."/urgency";
@@ -99,12 +96,12 @@
 							$info = $firebase->get($info_path);
 							$status = $firebase->get($status_path);
 
-							$iname = explode("\"", $iname)[1];
-							$work = explode("\"", $work)[1];
-							$beginline = explode("\"", $beginline)[1];
-							$deadline = explode("\"", $deadline)[1];
-							$info = explode("\"", $info)[1];
-							$status = explode("\"", $status)[1];
+							$iname = explode("\"", $iname);
+							$work = explode("\"", $work);
+							$beginline = explode("\"", $beginline);
+							$deadline = explode("\"", $deadline);
+							$info = explode("\"", $info);
+							$status = explode("\"", $status);
 							?>
 
 						<div id=error_card>
@@ -115,7 +112,7 @@
 										<?php 
 										if($urgency == "true")
 											echo "[긴급]&nbsp";
-										echo $iname;
+										echo $iname[1];
 										?>
 										
 									<hr>
@@ -125,7 +122,7 @@
 								<tr style="height:50px">
 									<th>
 										<?php
-										echo $beginline."&nbsp~&nbsp".$deadline;
+										echo $beginline[1]."&nbsp~&nbsp".$deadline[1];
 										?>
 									<hr>
 									</th>
@@ -138,7 +135,7 @@
 									<th>
 										<!-- <pre> 어렵다... </pre> -->
 										<?php
-										echo $info;
+										echo $info[1];
 										?>
 										
 									</th>
@@ -183,7 +180,7 @@
 										<?php 
 										if($urgency == "true")
 											echo "[긴급]&nbsp";
-										echo $iname;
+										echo $iname[1];
 										?>
 									</th>
 								</tr>
@@ -191,7 +188,7 @@
 								<tr style="height:50px">
 									<th>
 										<?php
-										echo $beginline."&nbsp~&nbsp".$deadline;
+										echo $beginline[1]."&nbsp~&nbsp".$deadline[1];
 										?>
 									</th>
 									<!-- <th>
@@ -203,7 +200,7 @@
 									<th>
 										<!-- <pre> 어렵다... </pre> -->
 										<?php
-										echo $info;
+										echo $info[1];
 										?>
 									</th>
 								</tr>

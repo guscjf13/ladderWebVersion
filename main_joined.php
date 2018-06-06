@@ -25,7 +25,6 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 			margin: 30px 50px 30px 50px;
 			background-color: red;
 			border-radius: 100px;
-			text-align: center;
 		}
 		#left_project_info {
 			border-radius: 50px;
@@ -103,43 +102,12 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		<?php
 			include "db.php";
 			include "top_menu.php";
-			$index = $_REQUEST['index'];	//REQUEST로 $index 받아서 넣어주고
-			$id = $_SESSION['id'];
-
-                $pname_path="/project/".$index."/pInfo/pname";	//path 설정할때 $index 사용함
-                $goal_path="/project/".$index."/pInfo/goal";
-                $nump_path="/project/".$index."/pInfo/numpeople";
-                $maxp_path="/project/".$index."/pInfo/maxpeople";
-                $leader_path="/project/".$index."/pInfo/leader";
-                $begin_path="/project/".$index."/pInfo/beginline";
-                $dead_path="/project/".$index."/pInfo/deadline";
-                $status_path="/project/".$index."/pInfo/status";
-                $info_path="/project/".$index."/pInfo/info";
-
-                $pname = $firebase->get($pname_path);
-                $goal = $firebase->get($goal_path);
-                $nump = $firebase->get($nump_path);
-                $maxp = $firebase->get($maxp_path);
-                $leader = $firebase->get($leader_path);
-                $begin = $firebase->get($begin_path);
-                $dead = $firebase->get($dead_path);
-                $status = $firebase->get($status_path);
-                $info = $firebase->get($info_path);
-
-                $pname = explode("\"", $pname)[1];	//"" 붙는거 없애는작업
-                $goal = explode("\"", $goal)[1];
-                $leader = explode("\"", $leader)[1];
-                $begin = explode("\"", $begin)[1];
-                $dead = explode("\"", $dead)[1];
-                $status = explode("\"", $status)[1];
-                $info = explode("\"", $info)[1];
 		?>
 
 		<div id=left_menu>
 
 			<div id=left_project_logo>
 				<img src=left_project_logo.png style="width: 200px; height:200px; border-radius: 100px;">
-				<div><?php echo $pname;?></div>
 			</div>
 
 			<div id=left_project_info>
@@ -155,25 +123,8 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 					</form>
 				</div>
 
-				<div id=left-project-detail>
-					<table border=1 cellsapcing=0>
-						<tr>
-							<th>팀장</th><td><?php echo $leader?></td>
-						</tr>
-						<tr>
-							<th>목표</th><td><?php echo $goal?></td>
-						</tr>
-						<tr>
-							<th><?php echo $begin?>&nbsp~&nbsp<?php echo $dead?></th>
-						</tr>
-						<tr>
-							<td><?php echo $info?></td>
-						</tr>
-					</table>
-				</div>
-				<?php if($id == $leader){?>
-				<a href=project_manage.php?index=<?php echo $index?>> <div id=left_project_manage> 프로젝트 관리 </div> </a>
-				<?php }?>
+				<div id=left-project-detail> project info </div>
+				<a href=project_manage.php> <div id=left_project_manage> 프로젝트 관리 </div> </a>
 			</div>
 
 		</div>
@@ -184,7 +135,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 			</div>
 
 			<?php
-				make_error_card($index);	//파라미터로 현재 프로젝트 번호 넘겨줘야함
+				make_error_card(1);	//파라미터로 현재 프로젝트 번호 넘겨줘야함
 			?>
 
 			<a href=make_error.php id=right_make_error class=top_sub>	오류 등록 </a> 

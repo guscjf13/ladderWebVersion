@@ -118,7 +118,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		<div id=buttons >
 			<input id=submit type=submit value="프로젝트 생성">
 			<!-- 프로젝트가 1개라도 있는 id면 main_joined.php로, 하나도 없는 id면 main_not_joined.php로 이동-->
-			<a href=project_board.php > <div id=backBtn> 뒤로 가기 </div> </a>
+			<a href=main_joined.php > <div id=backBtn> 뒤로 가기 </div> </a>
 		</div>
 	</form>
 
