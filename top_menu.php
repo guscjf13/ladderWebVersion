@@ -46,7 +46,6 @@ a {
 	<div id=top_space class=top_sub></div>
 	<a href=project_list.php id=top_project_list class=top_sub>내 프로젝트</a>
 	<a href=project_board.php id=top_project_board class=top_sub>프로젝트 게시판</a>
-	<a href=message.php id=top_project_board class=top_sub>쪽지</a>
 	<a href=logout.php id=top_logout class=top_sub>로그아웃</a>
 	<img src=user.png class=top_sub style="margin-top:10px; width: 60px; height: 60px;">
 </div>
