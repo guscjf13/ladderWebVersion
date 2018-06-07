@@ -30,18 +30,18 @@
 		</style>
 <?php		
 	require 'vendor/autoload.php';
-	const DEFAULT_URL = 'https://tactical-codex-203912.firebaseio.com';
+	const DEFAULT_URL = 'https://ladder-4774f.firebaseio.com';
 	const DEFAULT_PATH='/';
-	const DEFAULT_TOKEN = 'AIzaSyAvW-VI8ng3W6bHGIhoQYMdbsJIpLCBoNg';
+	const DEFAULT_TOKEN = 'AIzaSyCQdUGhgXCmsj6_LY84J91tAeuzL4cYLd0';
 	$firebase = new \Firebase\FirebaseLib(DEFAULT_URL);
 
 		function is_passwd_correct($id, $passwd, &$name)
 		{
 			global $firebase;
-			$id_path="/users/".$id."/id";
-			$pw_path="/users/".$id."/password";
-			$name_path="/users/".$id."/name";
-			$count_path="/users/".$id."/project/count";
+			$id_path="/user/".$id."/id";
+			$pw_path="/user/".$id."/password";
+			$name_path="/user/".$id."/name";
+			$count_path="/user/".$id."/project/count";
 
             $get_id = $firebase->get($id_path);
 

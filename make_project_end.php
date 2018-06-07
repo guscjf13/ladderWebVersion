@@ -21,19 +21,23 @@
 	}elseif(empty($info)){
 		?><script>alert("프로젝트 설명 누락!");location.replace("make_project.php");</script><?php
 	}else{
-		$count_path = "/project/count";
+		$count_path = "/project/increase";
 		$index = $firebase->get($count_path);
 		$index++;
 		$firebase->set($count_path,$index);
 
-		$user_count_path = "/users/".$_SESSION['id']."/project/count";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
-		$user_isLeader_path = "/users/".$_SESSION['id']."/project/".$index."/isLeader";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
-		$user_pname_path = "/users/".$_SESSION['id']."/project/".$index."/pname";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
-		$user_index_path = "/users/".$_SESSION['id']."/project/".$index."/index";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_count_path = "/user/".$_SESSION['id']."/project/count";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_increase_path = "/user/".$_SESSION['id']."/project/increase";
+		$user_isLeader_path = "/user/".$_SESSION['id']."/project/".$index."/isLeader";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_pname_path = "/user/".$_SESSION['id']."/project/".$index."/pname";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_index_path = "/user/".$_SESSION['id']."/project/".$index."/index";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
 
 		$user_count = $firebase->get($user_count_path);
+		$user_increase = $firebase->get($user_increase_path);
 		$user_count++;
+		$user_increase++;
 		$firebase->set($user_count_path,$user_count);
+		$firebase->set($user_increase_path,$user_increase);
 
 		$firebase->set($user_isLeader_path, true);
 		$firebase->set($user_pname_path, $pname);

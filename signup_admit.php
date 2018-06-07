@@ -14,12 +14,12 @@ $maxp_path = "/project/".$index."/pInfo/maxpeople";
 $status_path = "/project/".$index."/pInfo/status";
 $pname_path = "/project/".$index."/pInfo/pname";
 
-$count_path = "/users/".$sign_id."/project/count";
+$count_path = "/user/".$sign_id."/project/count";
 $a = $firebase->get($count_path);
 $pname = $firebase->get($pname_path);
-$user_path1 = "/users/".$sign_id."/project/".$a."/index";
-$user_path2 = "/users/".$sign_id."/project/".$a."/isLeader";
-$user_path3 = "/users/".$sign_id."/project/".$a."/".$pname;
+$user_path1 = "/user/".$sign_id."/project/".$a."/index";
+$user_path2 = "/user/".$sign_id."/project/".$a."/isLeader";
+$user_path3 = "/user/".$sign_id."/project/".$a."/".$pname;
 
 $nump = $firebase->get($nump_path);
 $maxp = $firebase->get($maxp_path);

@@ -30,7 +30,7 @@ elseif(strcmp($invite_id,$leader) == 0){
 	?><script>alert("자기자신은 초대 할 수 없습니다!");</script>
 	<script>history.back();</script><?php
 }else{
-	$path = "/users/";
+	$path = "/user/";
 	$array = $firebase->get($path);
 	$array = explode("}},", $array);
 	$i=0;

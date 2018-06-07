@@ -46,11 +46,11 @@
                 $signup_path = "/check/signup/".$index."/id/".$id;
                 $signup = $firebase->get($signup_path);
 
-                $ucount_path = "/users/".$id."/project/count";
+                $ucount_path = "/user/".$id."/project/increase";
                 $ucount = $firebase->get($ucount_path);
                 $flag = 0;
                 for($m=1;$m<=$ucount;$m++){
-                    $joined_path = "/users/".$id."/project/".$m."/index";
+                    $joined_path = "/user/".$id."/project/".$m."/index";
                     $joined = $firebase->get($joined_path);
                     if($joined == $index){
                         $flag = 1;
@@ -83,7 +83,7 @@
 		</tr>
 		<?php }elseif($id == $leader){?>
 		<tr>	
-			<td>상태</td><td style="text-decoration-color: green;">팀장</td>
+			<td>상태</td><td style="text-decoration-color: green;">내가 팀장</td>
 		</tr>
 		<?php }elseif($flag==1){?>
 		<tr>	

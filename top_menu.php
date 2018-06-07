@@ -34,9 +34,9 @@ a {
 	<?php if($_SESSION['count']==0){?>
 	<a href=main_not_joined.php id="logo_img" class=top_sub style="margin-left: 30px; margin-right: 10px"><img src=logo.png style="width: 80px; height: 80px;"></a>
 	<?php }elseif($_SESSION['count']==1){
-		$up_path = "/users/".$_SESSION['id']."/project";
+		$up_path = "/user/".$_SESSION['id']."/project";
 		$up = explode("\"", $firebase->get($up_path))[1];
-		$upi_path = "/users/".$_SESSION['id']."/project/".$up."/index";
+		$upi_path = "/user/".$_SESSION['id']."/project/".$up."/index";
 		$upi = $firebase->get($upi_path);
 		?>
 	<a href="main_joined.php?index=<?php echo $upi;?>" id="logo_img" class=top_sub style="margin-left: 30px; margin-right: 10px"><img src=logo.png style="width: 80px; height: 80px;"></a>

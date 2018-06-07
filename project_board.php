@@ -67,7 +67,7 @@ include "top_menu.php";
     </thead>
     
     <?php
-        $count_path="/project/count";
+        $count_path="/project/increase";
         $count = $firebase->get($count_path);
         $i = 1;
         while($count >= $i){
@@ -108,11 +108,11 @@ include "top_menu.php";
                 $signup_path = "/check/signup/".$i."/id/".$id;
                 $signup = $firebase->get($signup_path);
 
-                $ucount_path = "/users/".$id."/project/count";
+                $ucount_path = "/user/".$id."/project/increase";
                 $ucount = $firebase->get($ucount_path);
                 $flag = 0;
                 for($m=1;$m<=$ucount;$m++){
-                    $joined_path = "/users/".$id."/project/".$m."/index";
+                    $joined_path = "/user/".$id."/project/".$m."/index";
                     $joined = $firebase->get($joined_path);
                     if($joined == $index){
                         $flag = 1;
@@ -131,7 +131,7 @@ include "top_menu.php";
             <?php if($signup == 1){?>
             <td width="100" style="text-decoration-color: green;">신청중</td>
             <?php }elseif($id == $leader){?>
-            <td width="100" style="text-decoration-color: green;">팀장</td>
+            <td width="100" style="text-decoration-color: green;">내가 팀장</td>
             <?php }elseif($flag == 1){?>
             <td width="100" style="text-decoration-color: green;">참가중</td>
             <?php }else{?>

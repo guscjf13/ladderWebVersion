@@ -62,17 +62,17 @@ include "top_menu.php";
         </thead>
     
         <?php
-            $count_path="/users/".$_SESSION['id']."/project/count";
+            $count_path="/user/".$_SESSION['id']."/project/count";
             $count = $firebase->get($count_path);
             $i = 1;
             while($count >= $i){
-                $valid_path="/users/".$_SESSION['id']."/project/".$i;
+                $valid_path="/user/".$_SESSION['id']."/project/".$i;
                 $valid = $firebase->get($valid_path);
                 if($valid == 'null'){
                     $i++;
                 }
                 else{
-                    $index_path="/users/".$_SESSION['id']."/project/".$i."/index";
+                    $index_path="/user/".$_SESSION['id']."/project/".$i."/index";
                     $index = $firebase->get($index_path);
 
                     $pname_path="/project/".$index."/pInfo/pname";

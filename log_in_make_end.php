@@ -79,15 +79,17 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		}
 		else
 		{
-			$id_path="/users/".$id."/id";
-			$pw_path="/users/".$id."/password";
-			$name_path="/users/".$id."/name";
-			$count_path="/users/".$id."/project/count";
+			$id_path="/user/".$id."/id";
+			$pw_path="/user/".$id."/password";
+			$name_path="/user/".$id."/name";
+			$count_path="/user/".$id."/project/count";
+			$increase_path="/user/".$id."/project/increase";
 			
 			$firebase->set($id_path, $id);
 			$firebase->set($pw_path, $password);
 			$firebase->set($name_path, $name);
 			$firebase->set($count_path, 0);
+			$firebase->set($increase_path, 0);
 			
 			?>
 
