@@ -1,3 +1,5 @@
+<?php if(!isset($_SESSION)){session_start();}?>
+
 <style>
 		#error_card_total {
 			width: 1550px;
@@ -28,9 +30,9 @@
 		</style>
 <?php		
 	require 'vendor/autoload.php';
-	const DEFAULT_URL = 'https://tactical-codex-203912.firebaseio.com';
+	const DEFAULT_URL = 'https://ladder-4774f.firebaseio.com';
 	const DEFAULT_PATH='/';
-	const DEFAULT_TOKEN = 'AIzaSyAvW-VI8ng3W6bHGIhoQYMdbsJIpLCBoNg';
+	const DEFAULT_TOKEN = 'AIzaSyCQdUGhgXCmsj6_LY84J91tAeuzL4cYLd0';
 	$firebase = new \Firebase\FirebaseLib(DEFAULT_URL);
 
 		function is_passwd_correct($id, $passwd, &$name)
@@ -79,6 +81,7 @@
             		<label for=error_card_radio> 
 						<!-- 여기서 for문으로 오류 개수만큼 만들기-->
 						<?php
+						// 이거 만들 때 radio 하나씩 만들어주고 value로 issue index 넘겨주면 그에 해당하는 세부사항 볼 수 있을거같은데?!
 						for($i=1;$i<=$count;$i++){
 							$iname_path = "/project/".$index."/issue/".$i."/iname";
 							$urgency_path = "/project/".$index."/issue/".$i."/urgency";
@@ -96,12 +99,12 @@
 							$info = $firebase->get($info_path);
 							$status = $firebase->get($status_path);
 
-							$iname = explode("\"", $iname);
-							$work = explode("\"", $work);
-							$beginline = explode("\"", $beginline);
-							$deadline = explode("\"", $deadline);
-							$info = explode("\"", $info);
-							$status = explode("\"", $status);
+							$iname = explode("\"", $iname)[1];
+							$work = explode("\"", $work)[1];
+							$beginline = explode("\"", $beginline)[1];
+							$deadline = explode("\"", $deadline)[1];
+							$info = explode("\"", $info)[1];
+							$status = explode("\"", $status)[1];
 							?>
 
 						<div id=error_card>
@@ -112,7 +115,7 @@
 										<?php 
 										if($urgency == "true")
 											echo "[긴급]&nbsp";
-										echo $iname[1];
+										echo $iname;
 										?>
 										
 									<hr>
@@ -122,7 +125,7 @@
 								<tr style="height:50px">
 									<th>
 										<?php
-										echo $beginline[1]."&nbsp~&nbsp".$deadline[1];
+										echo $beginline."&nbsp~&nbsp".$deadline;
 										?>
 									<hr>
 									</th>
@@ -135,7 +138,7 @@
 									<th>
 										<!-- <pre> 어렵다... </pre> -->
 										<?php
-										echo $info[1];
+										echo $info;
 										?>
 										
 									</th>
@@ -180,7 +183,7 @@
 										<?php 
 										if($urgency == "true")
 											echo "[긴급]&nbsp";
-										echo $iname[1];
+										echo $iname;
 										?>
 									</th>
 								</tr>
@@ -188,7 +191,7 @@
 								<tr style="height:50px">
 									<th>
 										<?php
-										echo $beginline[1]."&nbsp~&nbsp".$deadline[1];
+										echo $beginline."&nbsp~&nbsp".$deadline;
 										?>
 									</th>
 									<!-- <th>
@@ -200,7 +203,7 @@
 									<th>
 										<!-- <pre> 어렵다... </pre> -->
 										<?php
-										echo $info[1];
+										echo $info;
 										?>
 									</th>
 								</tr>

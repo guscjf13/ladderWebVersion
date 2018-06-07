@@ -67,6 +67,9 @@
 		$firebase->set($status_path, "모집중");
 		$firebase->set($index_path, $index);
 
+		$check_path = "/check/signup/".$index."/leader";
+		$firebase->set($check_path, $_SESSION['id']);
+
 		?><script>alert("프로젝트 생성 완료!"); location.replace("project_board.php");</script><?php
 	}
 

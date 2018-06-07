@@ -53,7 +53,7 @@ include "top_menu.php";
         	<tr>
             	<th width="60">번호</th>
                 <th width="400">프로젝트 이름</th>
-                <th width="200">목적</th>
+                <th width="200">목표</th>
                 <th width="80">인원</th>
                 <th width="100">팀장</th>
                 <th width="200">기간</th>
@@ -93,22 +93,22 @@ include "top_menu.php";
                     $dead = $firebase->get($dead_path);
                     $status = $firebase->get($status_path);
 
-                    $pname = explode("\"", $pname);
-                    $goal = explode("\"", $goal);
-                    $leader = explode("\"", $leader);
-                    $begin = explode("\"", $begin);
-                    $dead = explode("\"", $dead);
-                    $status = explode("\"", $status);
+                    $pname = explode("\"", $pname)[1];
+                    $goal = explode("\"", $goal)[1];
+                    $leader = explode("\"", $leader)[1];
+                    $begin = explode("\"", $begin)[1];
+                    $dead = explode("\"", $dead)[1];
+                    $status = explode("\"", $status)[1];
     			?>
 	<tbody>
 		<tr>
             <td width="60"><?php echo $index; ?></td>
-            <td width="400"><a href="main_joined.php"><?php echo $pname[1]; ?></a></td>
-            <td width="200"><?php echo $goal[1]; ?></td>
+            <td width="400"><a href="main_joined.php?index=<?php echo $index;?>"><?php echo $pname; ?></a></td>   <!--REQUEST 로 선택한 글 프로젝트 $index를 넘겨준다.-->
+            <td width="200"><?php echo $goal; ?></td>
             <td width="80"><?php echo $nump; ?>/<?php echo $maxp; ?></td>
-            <td width="100"><?php echo $leader[1]; ?></td>
-            <td width="200"><?php echo $begin[1]; ?>&nbsp~&nbsp<?php echo $dead[1]; ?></td>
-            <td width="100"><?php echo $status[1]; ?></td>
+            <td width="100"><?php echo $leader; ?></td>
+            <td width="200"><?php echo $begin; ?>&nbsp~&nbsp<?php echo $dead; ?></td>
+            <td width="100"><?php echo $status; ?></td>
         </tr>
 	</tbody>
     <?php
