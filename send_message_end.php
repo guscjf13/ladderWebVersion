@@ -1,28 +1,40 @@
 <?php
 	include "db.php";
 
-	$mfrom=$_SESSION['id'];
-	$mid=$_POST["mid"];
-	$mtitle=$_POST["mtitle"];
-	$mcontent=$_POST["mcontent"];
-	$when=new DateTime();
+	$index=$_POST['index'];
+	$userid=$_SESSION['id'];
+	$mid=$_POST['mid'];
+	$mtitle=$_POST['mtitle'];
+	$mcontent=$_POST['mcontent'];
+	$time_send=new DateTime();
+	echo $index,$mid,$userid;
+	$i=1;
+	do{
+		$id_path="/project/".$index."/member/".$i."/id";
+		$id=$firebase->get($id_path);
+		if($id=="\"".$mid."\""){
+			break;
+		}
+		$i++;
+		$m_path="/project/".$index."/member/".$i;
+		$m=$firebase->get($m_path);
+	}while($m!="null");
 
-	$count_path = "/users/".$mid."/message/count";
+	$count_path = "/project/".$index."/member/".$i."/rcvmsg/increase";
 	$count=$firebase->get($count_path);
-	$index=$count+1;
-	echo $count,$index;
-	$firebase->update($count_path, $index);
+	$ddd=$count+1;
+	$firebase->set($count_path, $ddd);
 
-	$mfrom_path="/users/".$mid."/message/".$index."/from";
-	$mwhen_path="/users/".$mid."/message/".$index."/when";
-	$mtitle_path="/users/".$mid."/message/".$index."/title";
-	$mcontent_path="/users/".$mid."/message/".$index."/content";
+	$userid_path="/project/".$index."/member/".$i."/rcvmsg/".$ddd."/userid";
+	$timesend_path="/project/".$index."/member/".$i."/rcvmsg/".$ddd."/time_send";
+	$mtitle_path="/project/".$index."/member/".$i."/rcvmsg/".$ddd."/title";
+	$mcontent_path="/project/".$index."/member/".$i."/rcvmsg/".$ddd."/content";
 
-	$firebase->set($mfrom_path,$mfrom);
-	$firebase->set($mwhen_path,$when->format('c'));
+	$firebase->set($userid_path,$userid);
+	$firebase->set($timesend_path,$time_send->format('c'));
 	$firebase->set($mtitle_path,$mtitle);
 	$firebase->set($mcontent_path,$mcontent);
-	?>
-	<script>alert("쪽지를 보냈습니다.")</script>
-	<script> location.replace("main_not_joined.php") </script>
+	
+	
+	
 ?>

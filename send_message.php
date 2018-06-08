@@ -64,6 +64,9 @@ if(!isset($_SESSION)) {session_start();}
 		<?php
 			include "db.php";
 			include "top_menu.php";
+			$index=$_REQUEST['index'];
+			$id=$_SESSION['id'];
+			
 		?>
 
 		<img src=logo.png id="logo_center" style="width: 300px; height: auto; margin: 30px auto auto auto; padding: auto">
@@ -72,7 +75,22 @@ if(!isset($_SESSION)) {session_start();}
 		<tr>
 			<th>받는 사람</th>
 			<th>
-				<input id=mid name=mid type=text>
+				<select id=mid name=mid>
+					<?php
+						$i=1;
+
+						do{
+							$rid_path="/project/".$index."/member/".$i."/id";
+							$r_id=$firebase->get($rid_path);
+							if("\"".$id."\""!=$r_id){
+								?><option value=<?php echo $r_id;?>><?php echo $r_id;?></option><?php 
+							}
+							$i++;
+							$m_path="/project/".$index."/member/".$i;
+							$m=$firebase->get($m_path);
+						}while($m!="null");
+					?>
+				</select>
 			</th>
 		</tr>
 		<tr>
@@ -88,6 +106,7 @@ if(!isset($_SESSION)) {session_start();}
 			</th>
 		</tr>
 		</table>
+		<input type="hidden" name="index" value="<?php echo $index?>">
 		<input id=submit type=submit value="쪽지 보내기">
 	</form>
 

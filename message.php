@@ -122,6 +122,6 @@ if(!isset($_SESSION)) {session_start();}
 				?>
 			
 			</table>
-			<a href="send_message.php?index=<?php echo $index;?>""><input type="button" name="write_btn" value="쪽지 보내기"/></a>
+			<a href="send_message.php?index=<?php echo $index;?>"><input type="button" name="write_btn" value="쪽지 보내기"/></a>
 </body>
 </html>
