@@ -27,6 +27,7 @@
             text-align: center;
         }
   #board_area {margin:50px auto; height: 510px;}
+  #invite_area {margin:50px auto; height: 50px;}
   .list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
   .list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
   #main_head {
@@ -62,10 +63,10 @@ include "top_menu.php";
         </thead>
     
         <?php
-            $count_path="/user/".$_SESSION['id']."/project/count";
-            $count = $firebase->get($count_path);
+            $increase_path="/user/".$_SESSION['id']."/project/increase";
+            $increase = $firebase->get($increase_path);
             $i = 1;
-            while($count >= $i){
+            while($increase >= $i){
                 $valid_path="/user/".$_SESSION['id']."/project/".$i;
                 $valid = $firebase->get($valid_path);
                 if($valid == 'null'){
@@ -119,10 +120,73 @@ include "top_menu.php";
     </table>
 
  </div>
+
+<div id=invite>
+<?php //초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대초대
+$pincrease_path="/project/increase";
+$pincrease = $firebase->get($pincrease_path);
+$flag = false;
+$n = 1;
+while($n<=$pincrease){
+    $valid_path = "/check/signup/".$n."/id/".$_SESSION['id'];
+    $valid = $firebase->get($valid_path);
+    if($valid == 2){
+        $flag = true;
+        break;
+    }
+    $n++;
+}
+if($flag == false){?>
+    <h3 id=main_head>초대 받은 사다리가 없습니다 ㅠ.ㅠ</h3>
+<?php }else{?>
+ <h3 id=main_head>초대 받은 사다리</h3>
+ <div id="invite_area"> 
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th width="60">번호</th>
+                <th width="150">프로젝트 이름</th>
+                <th width="100">팀장</th>
+            </tr>
+        </thead>
+        <?php
+            $m = 1;
+            while($m<=$pincrease){
+                $check_path = "/check/signup/".$m."/id/".$_SESSION['id'];
+                $check = $firebase->get($check_path);
+
+                if($check == 2){
+                    $ipname_path = "/project/".$m."/pInfo/pname";
+                    $ileader_path = "/project/".$m."/pInfo/leader";
+
+                    $ipname = $firebase->get($ipname_path);
+                    $ileader = $firebase->get($ileader_path);
+
+                    $ipname = explode("\"", $ipname)[1];
+                    $ileader = explode("\"", $ileader)[1];
+        ?>
+    <tbody>
+        <tr>
+            <td width="60"><?php echo $m; ?></td>
+            <td width="150"><?php echo $ipname; ?></td>   <!--REQUEST 로 선택한 글 프로젝트 $index를 넘겨준다.-->
+            <td width="100"><?php echo $ileader; ?></td>
+            <td width="60"><a href="project_invite_admit.php?index=<?php echo $m;?>"><button>수락</button></a></td>
+            <td width="60"><a href="project_invite_reject.php?index=<?php echo $m;?>"><button>거절</button></a></td>
+        </tr>
+    </tbody>
+    <?php
+                $m++;
+            }else{
+                $m++;
+            }
+        }
+    ?>
+    </table>
+<?php }?>
+ </div>
+</div>
  <?php
         include "footer.php";
     ?>
-
-
  </body>
 </html>

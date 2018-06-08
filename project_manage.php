@@ -58,9 +58,9 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
    </head>
 
    <body>
-      <?php 
-         include "top_menu.php";
+      <?php
          include "db.php";
+         include "top_menu.php";
       
          $index = $_REQUEST['index'];
          $path = "/check/signup/".$index."/id/";
