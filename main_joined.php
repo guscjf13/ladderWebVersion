@@ -179,7 +179,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		</div>
 
 		<div id=right_menu>
-
+			<a href=message.php?index=<?php echo $index?> id="message_img" style="margin-left: 30px; margin-right: 10px"><img src=message.png style="width: 40px; height: 40px;"></a>
 			<div id=right_project_processbar>
 			</div>
 

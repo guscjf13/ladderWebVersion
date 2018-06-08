@@ -11,8 +11,6 @@ if(!isset($_SESSION)) {session_start();}
 			text-decoration: none;
 			color: black;
 		}
-
-		/*top 메뉴 스타일들*/
 		#top_menu {
 			height:80px;
 			background: #000000;
@@ -31,58 +29,39 @@ if(!isset($_SESSION)) {session_start();}
 			width: 1300px;
 			height: 80px;
 		}
-
-		/*왼쪽 메뉴 스타일들*/
-		#left_menu {
-			width: 300px;
-			height: 850px;
-			float:left;
+		#logo_center {
+		  display: table-cell;
+		  vertical-align: middle;
+		  text-align: center;
 		}
-		#left_project_logo {
-			width: 240px;
-			height: 240px;
-			margin: 30px;
-			background-color: red;
+		table {
+			margin: 0 auto;
 		}
-		#left_project_info {
-			width: 240px;
-			height: 530px;
-			margin: 30px;
-			background-color: black;
-		}
-
-		/*오른쪽 메뉴 스타일들*/
-		#right_menu {
-			width: 1580px;
-			height: 850px;
-			float:right;
-		}
-		#right_project_processbar {
-			width: 1550px;
-			height: 100px;
-			background-color: blue;
-			margin:25px 25px 25px 0;
-		}
-		#right_make_error {
-			display: inline-block;
-			width: 700px;
+		th {
+			width: 500px;
 			height: 50px;
-			background-color: black;
-			line-height: 50px;
-			text-align: center;
-			margin-left: 440px;
 		}
-		#right_project_board {
-			width: 1550px;
-			height: 275px;
-			background-color: green;
-			margin:100px 25px 25px 0;
+		input {
+			width: 490px;
+			height: 40px;
 		}
-		#message_board{
-			margin: 50px;
+		#submit {
+			display: block;
+			margin: 0 auto;
+		}
+		pre {
+			float: left;
+		}
+		select {
+			width: 400px;
+			height: 40px;
+			float: left;
 		}
 		.list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
   		.list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
+		</style>
+	</head>
+		
 
 		</style>
 </head>
@@ -90,6 +69,8 @@ if(!isset($_SESSION)) {session_start();}
 		<?php
 			include "db.php";
 			include "top_menu.php";
+			$index=$_REQUEST['index'];
+			$id=$_SESSION['id'];
 		?>
 
 		</div>
@@ -103,30 +84,44 @@ if(!isset($_SESSION)) {session_start();}
 					</tr>
 				</thead>
 				<?php
+					$i=1;
 					do{
-						$i=1;
-						$from_path="/users/".$_SESSION['id']."/message/".$i."/from";
-						$title_path="/users/".$_SESSION['id']."/message/".$i."/title";
-						$when_path="/users/".$_SESSION['id']."/message/".$i."/when";
-						$from=$firebase->get($from_path);
-						$title=$firebase->get($title_path);
-						$when=$firebase->get($when_path);
+						$id_path="/project/".$index."/member/".$i."/id";
+						$r_id=$firebase->get($id_path);
+						if("\"".$id."\""==$r_id){
+							$m_index=$i;
+							break;
+						}	
+						$i++;
+						$m_path="/project/".$index."/member/".$i;
+						$m=$firebase->get($m_path);
+					    }while($m!="null");
+					    $m_i=0;
+					    do{
+					    	$userid_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/userid";
+					    	$title_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/path";
+					    	// $content_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/content";
+					    	$timesend_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/time_send";
+
+					    	$userid=$firebase->get($userid_path);
+					    	$title=$firebase->get($title_path);
+					    	$time_send=$firebase->get($timesend_path);
+					    	?>
+					    	<tbody>
+               					<tr>
+                  					<td width="100"><?php echo $userid?></td>
+                  					<td width="100"><a href="message_content.php?index=<?php echo $index;?>&m_index=<?php echo $m_index?>&m_i=<?php echo $m_i?>"><?php echo $title?></a></td>
+                  					<td width="400"><?php echo $time_send?></td>
+               					</tr>
+            				</tbody>
+            				<?php
+            				$m_i++;
+            				$mm_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i;
+            				$mm=$firebase->get($mm_path);
+					    }while($mm!="null");
 				?>
-				<tbody>
-					<tr>
-						<td width="100"><a href="message_content.php"><?php echo $from?></a></td>
-						<td width="100"><?php echo $title?></td>
-						<td width="400"><?php echo $when?></td>
-					</tr>
-				</tbody>
-				<?php
-					$i++;
-					$m_path="/users/".$_SESSION['id']."/message/".$i;
-					$m=$firebase->get($m_path);
-					}while($m!="null");
-				?>
-				
+			
 			</table>
-			<a href=send_message.php><input type="button" name="write_btn" value="쪽지 보내기"/></a>
+			<a href="send_message.php?index=<?php echo $index;?>""><input type="button" name="write_btn" value="쪽지 보내기"/></a>
 </body>
 </html>
