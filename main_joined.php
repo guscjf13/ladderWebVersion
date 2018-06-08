@@ -15,7 +15,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		/*왼쪽 메뉴 스타일들*/
 		#left_menu {
 			width: 300px;
-			height: 850px;
+			height: 790px;
 			float:left;
 			overflow: hidden;
 		}
@@ -33,50 +33,31 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 			height: 540px;
 			margin: 30px;
 			padding-top: 30px;
-			background-color: #686868;
-		}
-		#left_project_select {
-			width: 200px;
-			height: 30px;
-			margin-left: 20px;
-			margin-bottom: 30px;
-			background-color: white;
-			line-height: 350px;
-			text-align: center;			
-		}
-		#left_project_select_btn {
-			width: 50px;
-			height: 30px;
-			float: left;
 		}
 		#left-project-detail {
 			width: 200px;
 			height: 360px;
+			margin-top: 50px;
 			margin-left: 20px;
-			margin-bottom: 30px;
 			background-color: white;
-			line-height: 250px;
 			text-align: center;
 		}
 		#left_project_manage {
 			width: 180px;
 			height: 50px;
+			border: 3px solid black;
 			margin-left: 30px;
-			line-height: 50px;
-			text-align: center;
-			background-color: white;
+			background-size: cover;
+			background-image: url('left_project_manage.png')
 		}
-
+		#left_project_manage:hover {
+			background-image: url('left_project_manage_hover.png')			
+		}
+		
 		/*오른쪽 메뉴 스타일들*/
 		#right_menu {
-			height: 850px;
+			height: 790px;
 			float:right;
-		}
-		#right_project_processbar {
-			height: 100px;
-			border-radius: 50px;
-			background-color: #B2EBF4;
-			margin:25px 25px 25px 0;
 		}
 		#right_make_error {
 			border-radius: 100px;
@@ -90,7 +71,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		}
 		#right_project_board {
 			border-radius: 50px;
-			height: 275px;
+			height: 210px;
 			background-color: #CEF279;
 			margin:100px 25px 25px 0;
 		}
@@ -139,51 +120,38 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 
 			<div id=left_project_logo>
 				<img src=left_project_logo.png style="width: 200px; height:200px; border-radius: 100px;">
-				<div><?php echo $pname;?></div>
+				<h1 style="margin-top: 20px"><?php echo $pname;?></h1>
 			</div>
 
 			<div id=left_project_info>
-			
-				<div id=left_project_select>
-					<form action="main_joined_project_select.php" method="post">
-						<select name=project_select style="float: left; width: 150px; height: 30px; text-align: center;">
-							<option value="1">프로젝트1</option>
-							<option value="2">프로젝트2</option>
-							<option value="3">프로젝트3</option>
-						</select>
-						<input type=submit id=left_project_select_btn value=조회> </input>
-					</form>
-				</div>
 
 				<div id=left-project-detail>
-					<table border=1 cellsapcing=0>
-						<tr>
-							<th>팀장</th><td><?php echo $leader?></td>
+					<table border=0 style="width: 200px; height: 340px; border-collapse: collapse;">
+						<tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
+							<th><h2>팀장</h2></th><td><?php echo $leader?></td>
 						</tr>
-						<tr>
-							<th>목표</th><td><?php echo $goal?></td>
+						<tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
+							<th><h2>목표</h2></th><td><?php echo $goal?></td>
 						</tr>
-						<tr>
-							<th><?php echo $begin?>&nbsp~&nbsp<?php echo $dead?></th>
+						<tr style="height: 80px; border-bottom: 2px dotted #BDBDBD;">
+							<th colspan=2><?php echo $begin?>&nbsp~<br>&nbsp<?php echo $dead?></th>
 						</tr>
-						<tr>
-							<td><?php echo $info?></td>
+						<tr style="height: 100px;">
+							<th colspan=2><?php echo $info?></td>
 						</tr>
 					</table>
 				</div>
 				<?php if($id == $leader){?>
-				<a href=project_manage.php?index=<?php echo $index?>> <div id=left_project_manage> 프로젝트 관리 </div> </a>
+				<a href=project_manage.php?index=<?php echo $index?>> <div id=left_project_manage></div> </a>
 				<?php }?>
 			</div>
 
 		</div>
 
 		<div id=right_menu>
-			<a href=message.php?index=<?php echo $index?> id="message_img" style="margin-left: 30px; margin-right: 10px"><img src=message.png style="width: 40px; height: 40px;"></a>
-			<div id=right_project_processbar>
-			</div>
 
 			<?php
+				make_processbar(56);
 				make_error_card($index);	//파라미터로 현재 프로젝트 번호 넘겨줘야함
 			?>
 

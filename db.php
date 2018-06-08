@@ -1,6 +1,22 @@
 <?php if(!isset($_SESSION)){session_start();}?>
 
 <style>
+		#right_project_processbar {
+			width: 1500px;
+			height: 30px;
+			border: 3px solid black;
+			background-color: #FFFFFF;
+			margin:25px 25px 25px 0;
+			line-height: 30px;
+			font-size: 20px;
+		}
+		.right_project_processbar_1percentage {
+			width: 14px;
+			height: 30px;
+			margin-left: 1px;
+			background-color: #00D8FF;
+			float: left;
+		}
 		#error_card_total {
 			width: 1550px;
 			height: 300px;
@@ -12,11 +28,11 @@
 			margin:25px 25px 25px 0;
 		}
 		#error_card {
-			width: 260px;
+			width: 249px;
 			height: 300px;
-			background-color: #F15F5F;
 			border-style: none;
-			border-radius: 50px;
+			background-image: url('error_red.png');
+			background-size: cover;
 			margin-right: 50px;
 			float: left;
 			cursor: pointer;
@@ -64,6 +80,23 @@
 			//id, password 파이어베이스랑 검사해서 일치하면 name에 사용자의 이름 넣어주면서 true 반환, id, password 틀리면 false 반환
 		}
 
+		function make_processbar($percentage)
+		{
+			?>
+			
+			<h1> 사다리를 얼마나 올랐을까... </h1>
+			<div id=right_project_processbar>
+				<?php
+					for($i=0;$i<$percentage;$i++) {
+						?> <div class=right_project_processbar_1percentage> </div> <?php
+					}
+					echo "　$percentage%";
+				?>
+			</div>
+
+			<?php
+		}
+
 		function make_error_card($project_index)
 		{
 			global $firebase;
@@ -108,8 +141,8 @@
 							?>
 
 						<div id=error_card>
-							<table style="border: black; border-collapse: collapse; width:260px;">
-								<tr style="height:50px">
+							<table style="border-style: none; width:249px;">
+								<tr style="height:100px;">
 									<th>
 										<!-- <pre> 컴파일 오류 </pre>  -->
 										<?php 
@@ -122,7 +155,7 @@
 									</th>
 								</tr>
 
-								<tr style="height:50px">
+								<tr style="height:30px">
 									<th>
 										<?php
 										echo $beginline."&nbsp~&nbsp".$deadline;
@@ -134,7 +167,7 @@
 									</th> -->
 								</tr>
 
-								<tr style="height:200px">
+								<tr style="height:170px">
 									<th>
 										<!-- <pre> 어렵다... </pre> -->
 										<?php
