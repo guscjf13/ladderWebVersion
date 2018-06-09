@@ -11,12 +11,12 @@ if(!isset($_SESSION)) {session_start();}
 <?php
 	include "db.php";
 	$index=$_REQUEST['index'];
-	$m_index=$_REQUEST['m_index'];
-	$m_i=$_REQUEST['m_i'];
-	$userid_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/userid";
-	$title_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/title";
-	$content_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/content";
-   	$timesend_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/time_send";
+	$mm_index=$_REQUEST['mm_index'];
+	$mm_i=$_REQUEST['mm_i'];
+	$userid_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/userid";
+	$title_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/title";
+	$content_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/content";
+   	$timesend_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/time_send";
 
   	$userid=$firebase->get($userid_path);
    	$title=$firebase->get($title_path);
@@ -30,7 +30,7 @@ if(!isset($_SESSION)) {session_start();}
 ?>
 <table class="list-table" boder="1">
 	<tr>
-		<th>보낸 사람</th>
+		<th>받는 사람</th>
 		<th><?php echo $userid?></th>
 	</tr>
 	<tr>

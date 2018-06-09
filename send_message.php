@@ -63,13 +63,12 @@ if(!isset($_SESSION)) {session_start();}
 
 		<?php
 			include "db.php";
-			include "top_menu.php";
 			$index=$_REQUEST['index'];
 			$id=$_SESSION['id'];
+			$m_index=$_REQUEST['m_index'];
 			
 		?>
 
-		<img src=logo.png id="logo_center" style="width: 300px; height: auto; margin: 30px auto auto auto; padding: auto">
 		<form id=message_form action="send_message_end.php" method="post">
 		<table border="1">
 		<tr>
@@ -83,7 +82,8 @@ if(!isset($_SESSION)) {session_start();}
 							$rid_path="/project/".$index."/member/".$i."/id";
 							$r_id=$firebase->get($rid_path);
 							if("\"".$id."\""!=$r_id){
-								?><option value=<?php echo $r_id;?>><?php echo $r_id;?></option><?php 
+								$r = explode("\"",$r_id)[1];
+								?><option value=<?php echo $r_id;?>><?php echo $r;?></option><?php 
 							}
 							$i++;
 							$m_path="/project/".$index."/member/".$i;
@@ -106,8 +106,10 @@ if(!isset($_SESSION)) {session_start();}
 			</th>
 		</tr>
 		</table>
+		<input type="hidden" name="m_index" value="<?php echo $m_index?>">
 		<input type="hidden" name="index" value="<?php echo $index?>">
 		<input id=submit type=submit value="쪽지 보내기">
+		<input type=button value="뒤로 가기" Onclick="history.back();">
 	</form>
 
 <body>
