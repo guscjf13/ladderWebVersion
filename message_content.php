@@ -23,7 +23,7 @@ if(!isset($_SESSION)) {session_start();}
    	$content=$firebase->get($content_path);
    	$time_send=$firebase->get($timesend_path);
 
-   	$userid=explode("\"", $userid)[1];
+   	$u=explode("\"", $userid)[1];
    	$title=explode("\"", $title)[1];
    	$content=explode("\"", $content)[1];
    	$time_send=explode("\"", $time_send)[1];
@@ -31,7 +31,7 @@ if(!isset($_SESSION)) {session_start();}
 <table class="list-table" boder="1">
 	<tr>
 		<th>보낸 사람</th>
-		<th><?php echo $userid?></th>
+		<th><?php echo $u?></th>
 	</tr>
 	<tr>
 		<th>보낸 시각</th>
@@ -46,6 +46,7 @@ if(!isset($_SESSION)) {session_start();}
 		<th><?php echo $content?></th>
 	</tr>
 </table>
+<a href="reply_message.php?index=<?php echo $index?>&m_index=<?php echo $m_index?>&m_i=<?php echo $m_i?>">답장 하기</a>
 <input type=button value="뒤로 가기" Onclick="history.back();">
 </body>
 </html>
