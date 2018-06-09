@@ -2,7 +2,7 @@
 if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없으면 세션을 시작함
 include "db.php";
 
-$sign_id = $_REQUEST['sign_id'];
+$sign_id = $_SESSION['id'];
 $index = $_REQUEST['index'];
 $path = "/check/signup/".$index."/id/".$sign_id;
 
@@ -35,6 +35,7 @@ $nump = $firebase->get($nump_path);
 $maxp = $firebase->get($maxp_path);
 
 if($nump >= $maxp){
+	$firebase->delete($path);
 	?><script>alert("최대 인원 초과!"); history.back();</script><?php
 }else{
 	$nump++;
@@ -52,9 +53,6 @@ if($nump >= $maxp){
 	if($nump == $maxp){
 		$firebase->set($status_path, "꽉참");
 	}
-	?><script>alert("승인 완료!"); history.back();</script><?php
+	?><script>alert("참가 완료!"); history.back();</script><?php
 }
-
-
-
 ?>
