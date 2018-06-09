@@ -48,7 +48,7 @@ if(!isset($_SESSION)) {session_start();}
 			height: 50px;
 		}
 		input {
-			width: 490px;
+			width: 200px;
 			height: 40px;
 		}
 		#submit {
@@ -63,8 +63,8 @@ if(!isset($_SESSION)) {session_start();}
 			height: 40px;
 			float: left;
 		}
-		.list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
-  		.list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
+		.list-table th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
+  		.list-table td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
 		</style>
 	</head>
 </head>
