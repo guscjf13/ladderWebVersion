@@ -41,6 +41,7 @@ if(!isset($_SESSION)) {session_start();}
 </head>
 
 <body>
+<<<<<<< HEAD
 
 	<?php
 		include "db.php";
@@ -90,6 +91,48 @@ if(!isset($_SESSION)) {session_start();}
 	</a>
 	<input id=backBtn type=button Onclick="history.back();">
 
+=======
+<?php
+	include "db.php";
+	$index=$_REQUEST['index'];
+	$m_index=$_REQUEST['m_index'];
+	$m_i=$_REQUEST['m_i'];
+	$userid_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/userid";
+	$title_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/title";
+	$content_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/content";
+   	$timesend_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/time_send";
+
+  	$userid=$firebase->get($userid_path);
+   	$title=$firebase->get($title_path);
+   	$content=$firebase->get($content_path);
+   	$time_send=$firebase->get($timesend_path);
+
+   	$u=explode("\"", $userid)[1];
+   	$title=explode("\"", $title)[1];
+   	$content=explode("\"", $content)[1];
+   	$time_send=explode("\"", $time_send)[1];
+?>
+<table class="list-table" boder="1">
+	<tr>
+		<th>보낸 사람</th>
+		<th><?php echo $u?></th>
+	</tr>
+	<tr>
+		<th>보낸 시각</th>
+		<th><?php echo $time_send?></th>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<th><?php echo $title?></th>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<th><?php echo $content?></th>
+	</tr>
+</table>
+<a href="reply_message.php?index=<?php echo $index?>&m_index=<?php echo $m_index?>&m_i=<?php echo $m_i?>">답장 하기</a>
+<input type=button value="뒤로 가기" Onclick="history.back();">
+>>>>>>> master
 </body>
 
 </html>
