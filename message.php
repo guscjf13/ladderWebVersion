@@ -78,7 +78,6 @@ if(!isset($_SESSION)) {session_start();}
 		}
 		.list-table th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
   		.list-table td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
-<<<<<<< HEAD
   		#sendBtn {
   			width: 150px;
   			height: 50px;
@@ -94,10 +93,6 @@ if(!isset($_SESSION)) {session_start();}
   			background-image: url('send_message_hover.png')
   		}
 	</style>
-=======
-		</style>
-	</head>
->>>>>>> master
 </head>
 
 <body>
