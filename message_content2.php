@@ -24,6 +24,7 @@ if(!isset($_SESSION)) {session_start();}
 		}
 		#backBtn:hover {
 			background-image: url('back_hover.png');
+			cursor: pointer;
 		}
 	</style>
 </head>

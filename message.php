@@ -90,7 +90,8 @@ if(!isset($_SESSION)) {session_start();}
   			background-image: url('send_message.png');
   		}
   		#sendBtn:hover {
-  			background-image: url('send_message_hover.png')
+  			background-image: url('send_message_hover.png');
+  			cursor: pointer;
   		}
 	</style>
 </head>

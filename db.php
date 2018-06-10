@@ -90,7 +90,12 @@
 					for($i=0;$i<$percentage;$i++) {
 						?> <div class=right_project_processbar_1percentage> </div> <?php
 					}
-					echo "　$percentage%";
+					if($percentage<= 96){
+						echo "　$percentage%";
+					}else{
+						?><div style="position: absolute; right: 6%;left: 94%;"><?php echo "$percentage%";?></div><?php
+					}
+					
 				?>
 			</div>
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	input[type=checkbox]
+{
+  display: none;
+
+  & + label
+  {
+    svg
+    {
+      height: 200px;
+      
+      .check
+      {
+        transition: stroke-dashoffset .5s ease-in-out .2s, stroke-width .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .outer
+      {
+        transition: fill .3s ease-out;
+        fill: #BDBDBD;
+      }
+
+      .inner
+      {   
+        fill: #FFFFFF;
+        
+        transition: opacity .2s ease-in-out .2s, height .3s ease-in-out .3s, width .3s ease-in-out .3s, x .3s ease-in-out .3s, y .3s ease-in-out .3s, rx .3s ease-in-out .3s;
+        
+        opacity: 1;
+        height: 56px;
+        width: 56px;
+        x: 4px;
+        y: 4px;
+        rx: 4px;
+      }
+    }
+    
+    &:hover
+    {
+      svg
+      {
+        .check
+        {
+          stroke-dashoffset: 0;  
+          stroke-width: 8px;
+        }
+        
+        .outer
+        {
+          fill: #9E9E9E;
+        }
+
+        .inner
+        {
+          opacity: 0;
+          height: 0px;
+          width: 0px;
+          x: 12px;
+          y: 28px;
+          rx: 100px;
+        }
+      }
+    }
+  }
+
+  &:checked
+  {
+    & + label
+    {
+      svg
+      {
+        .check
+        {
+          stroke-dashoffset: 0;
+          stroke-width: 7px;
+        }
+        
+        .outer
+        {
+          transition: fill .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          fill: #2196F3;
+        }
+
+        .inner
+        {
+          height: 0px;
+          width: 0px;
+          x: 16px;
+          y: 16px;
+          rx: 100px;
+        }
+      }
+    }
+  }
+}
+</style>
+</head>
+<body>
+	<input type="checkbox" id="q_yes" name="q" value="yes" />
+<label for="q_yes"><svg shape-rendering="optimizeQuality" preserveAspectRatio="xMidYMid meet" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect class="outer" fill="#BDBCB9" x="0" y="0" width="64" height="64" rx="8"></rect>
+    <rect class="inner" fill="#BDBCB9" x="4" y="4" width="56" height="56" rx="4"></rect>
+    <polyline class="check" stroke="#FFFFFF" stroke-dasharray="270" stroke-dashoffset="270" stroke-width="8" stroke-linecap="round" fill="none" stroke-linejoin="round" points="16 31.8 27.4782609 43 49 22"></polyline>
+  </svg></label>
+
+</body>
+</html>

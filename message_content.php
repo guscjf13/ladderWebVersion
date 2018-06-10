@@ -23,6 +23,7 @@ if(!isset($_SESSION)) {session_start();}
 		}
 		#answerBtn:hover {
 			background-image: url('answer_hover.png');
+			cursor: pointer;
 		}
 		#backBtn {
 			margin: 20px 20px;
@@ -36,6 +37,7 @@ if(!isset($_SESSION)) {session_start();}
 		}
 		#backBtn:hover {
 			background-image: url('back_hover.png');
+			cursor: pointer;
 		}
 	</style>
 </head>
