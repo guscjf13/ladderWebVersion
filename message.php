@@ -3,12 +3,21 @@ if(!isset($_SESSION)) {session_start();}
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"/>
 	<meta charset="UTF-8" \>
 	<style>
-	#message input:nth-of-type(1), #message input:nth-of-type(1) ~ div:nth-of-type(1), #message input:nth-of-type(2), #message input:nth-of-type(2) ~ div:nth-of-type(2){display:none;}
-	#message input:nth-of-type(1):checked ~ div:nth-of-type(1), #message input:nth-of-type(2):checked ~ div:nth-of-type(2){display: block;}
+		@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+		#message_logo {
+			width: 180px;
+			height: 80px;
+			background-image: url('message_logo.png');
+			background-size: cover;
+			margin: 5px auto;
+		}
+		#message input:nth-of-type(1), #message input:nth-of-type(1) ~ div:nth-of-type(1), #message input:nth-of-type(2), #message input:nth-of-type(2) ~ div:nth-of-type(2){display:none;}
+		#message input:nth-of-type(1):checked ~ div:nth-of-type(1), #message input:nth-of-type(2):checked ~ div:nth-of-type(2){display: block;}
 		@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 		#message > label {
     		display:inline-block;
@@ -43,12 +52,16 @@ if(!isset($_SESSION)) {session_start();}
 		table {
 			margin: 0 auto;
 		}
+		td {
+			text-align: center;
+		}
 		th {
+			text-align: center;
 			width: 500px;
 			height: 50px;
 		}
 		input {
-			width: 490px;
+			width: 200px;
 			height: 40px;
 		}
 		#submit {
@@ -63,29 +76,50 @@ if(!isset($_SESSION)) {session_start();}
 			height: 40px;
 			float: left;
 		}
-		.list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
-  		.list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
-		</style>
-	</head>
+		.list-table th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
+  		.list-table td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
+  		#sendBtn {
+  			width: 150px;
+  			height: 50px;
+  			margin-top: 20px;
+  			margin-right: 30px;
+  			float: right;
+  			border-style: none;
+  			border: 0;
+  			background-size: cover;
+  			background-image: url('send_message.png');
+  		}
+  		#sendBtn:hover {
+  			background-image: url('send_message_hover.png')
+  		}
+	</style>
 </head>
+
 <body>
-		<?php
-			include "db.php";
-			$index=$_REQUEST['index'];
-			$id=$_SESSION['id'];
-		?>
-		<div id="message">
+
+	<?php
+		include "db.php";
+		$index=$_REQUEST['index'];
+		$id=$_SESSION['id'];
+	?>
+
+	<div id=message_logo>
+	</div>
+
+	<div id="message">
+
 		<input id="tab1" type=radio name=tab checked=checked>
 		<input id="tab2" type=radio name=tab>
 		<label for="tab1">받은 쪽지</label>
 		<label for="tab2">보낸 쪽지</label>
+
 		<div class=tab-item1>
 			<table class="list-table">
 				<thead>
 					<tr>
-						<th width="100">보낸 사람</th>
-						<th width="100">제목</th>
-						<th width="400">보낸 시각</th>
+						<th width="100" style="text-align: center; line-height: 40px;">보낸 사람</th>
+						<th width="100" style="text-align: center; line-height: 40px;">제목</th>
+						<th width="400" style="text-align: center; line-height: 40px;">보낸 시각</th>
 					</tr>
 				</thead>
 				<?php
@@ -102,44 +136,44 @@ if(!isset($_SESSION)) {session_start();}
 						$m=$firebase->get($m_path);
 					    }while($m!="null");
 
-					    $m_i=1;
+				    $m_i=1;
 
-					    do{
-					    	$userid_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/userid";
-					    	$title_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/title";
-					    	// $content_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/content";
-					    	$timesend_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/time_send";
+				    do{
+				    	$userid_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/userid";
+				    	$title_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/title";
+				    	// $content_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/content";
+				    	$timesend_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i."/time_send";
 
-					    	$userid=$firebase->get($userid_path);
-					    	$title=$firebase->get($title_path);
-					    	$time_send=$firebase->get($timesend_path);
-					    	$u=explode("\"",$userid)[1];
-					    	$t=explode("\"",$title)[1];
-					    	$ts=explode("\"",$time_send)[1];
-					    	?>
-					    	<tbody>
-               					<tr>
-                  					<td width="100"><?php echo $u?></td>
-                  					<td width="100"><a href="message_content.php?index=<?php echo $index;?>&m_index=<?php echo $m_index?>&m_i=<?php echo $m_i?>"><?php echo $t?></a></td>
-                  					<td width="400"><?php echo $ts?></td>
-               					</tr>
-            				</tbody>
-            				<?php
-            				$m_i++;
-            				$mm_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i;
-            				$mm=$firebase->get($mm_path);
-					    }while($mm!="null");
+				    	$userid=$firebase->get($userid_path);
+				    	$title=$firebase->get($title_path);
+				    	$time_send=$firebase->get($timesend_path);
+				    	$u=explode("\"",$userid)[1];
+				    	$t=explode("\"",$title)[1];
+				    	$ts=explode("\"",$time_send)[1];
+				    	?>
+				    	<tbody>
+	       					<tr>
+	          					<td width="100"><?php echo $u?></td>
+	          					<td width="100"><a href="message_content.php?index=<?php echo $index;?>&m_index=<?php echo $m_index?>&m_i=<?php echo $m_i?>"><?php echo $t?></a></td>
+	          					<td width="400"><?php echo $ts?></td>
+	       					</tr>
+	    				</tbody>
+	    				<?php
+	    				$m_i++;
+	    				$mm_path="/project/".$index."/member/".$m_index."/rcvmsg/".$m_i;
+	    				$mm=$firebase->get($mm_path);
+				    }while($mm!="null");
 				?>
-			
 			</table>
-			</div>
-			<div class=tab-item2>
-				<table class="list-table">
+		</div>
+
+		<div class=tab-item2>
+			<table class="list-table">
 				<thead>
 					<tr>
-						<th width="100">받는 사람</th>
-						<th width="100">제목</th>
-						<th width="400">보낸 시각</th>
+						<th width="100" style="text-align: center; line-height: 40px;">받는 사람</th>
+						<th width="100" style="text-align: center; line-height: 40px;">제목</th>
+						<th width="400" style="text-align: center; line-height: 40px;">보낸 시각</th>
 					</tr>
 				</thead>
 				<?php
@@ -156,38 +190,42 @@ if(!isset($_SESSION)) {session_start();}
 						$mm=$firebase->get($mm_path);
 					    }while($mm!="null");
 
-					    $mm_i=1;
+				    $mm_i=1;
 
-					    do{
-					    	$suserid_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/userid";
-					    	$stitle_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/title";
-					    	// $content_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/content";
-					    	$stimesend_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/time_send";
+				    do{
+				    	$suserid_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/userid";
+				    	$stitle_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/title";
+				    	// $content_path="/project/".$index."/member/".$m_index."/id/rcvmsg/".$m_i."/content";
+				    	$stimesend_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i."/time_send";
 
-					    	$suserid=$firebase->get($suserid_path);
-					    	$stitle=$firebase->get($stitle_path);
-					    	$stime_send=$firebase->get($stimesend_path);
-					    	$su=explode("\"",$suserid)[1];
-					    	$st=explode("\"",$stitle)[1];
-					    	$sts=explode("\"",$stime_send)[1];
-					    	?>
-					    	<tbody>
-               					<tr>
-                  					<td width="100"><?php echo $su?></td>
-                  					<td width="100"><a href="message_content2.php?index=<?php echo $index;?>&mm_index=<?php echo $mm_index?>&mm_i=<?php echo $mm_i?>"><?php echo $st?></a></td>
-                  					<td width="400"><?php echo $sts?></td>
-               					</tr>
-            				</tbody>
-            				<?php
-            				$mm_i++;
-            				$mmm_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i;
-            				$mmm=$firebase->get($mmm_path);
-					    }while($mmm!="null");
+				    	$suserid=$firebase->get($suserid_path);
+				    	$stitle=$firebase->get($stitle_path);
+				    	$stime_send=$firebase->get($stimesend_path);
+				    	$su=explode("\"",$suserid)[1];
+				    	$st=explode("\"",$stitle)[1];
+				    	$sts=explode("\"",$stime_send)[1];
+				    	?>
+				    	<tbody>
+	       					<tr>
+	          					<td width="100"><?php echo $su?></td>
+	          					<td width="100"><a href="message_content2.php?index=<?php echo $index;?>&mm_index=<?php echo $mm_index?>&mm_i=<?php echo $mm_i?>"><?php echo $st?></a></td>
+	          					<td width="400"><?php echo $sts?></td>
+	       					</tr>
+	    				</tbody>
+	    				<?php
+	    				$mm_i++;
+	    				$mmm_path="/project/".$index."/member/".$mm_index."/sendmsg/".$mm_i;
+	    				$mmm=$firebase->get($mmm_path);
+				    }while($mmm!="null");
 				?>
-			
 			</table>
-			</div>
-			</div>
-			<a href="send_message.php?index=<?php echo $index;?>&m_index=<?php echo $m_index;?>"><input type="button" class="button is-rounded" name="write_btn" value="쪽지 보내기"/></a>
+		</div>
+
+	</div>
+
+	<a href="send_message.php?index=<?php echo $index;?>&m_index=<?php echo $m_index;?>">
+		<input type="button" id=sendBtn name="write_btn"/>
+	</a>
+
 </body>
 </html>

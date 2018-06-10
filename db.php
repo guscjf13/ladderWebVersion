@@ -84,7 +84,7 @@
 		{
 			?>
 			
-			<h1> 사다리를 얼마나 올랐을까... </h1>
+			<h1 id=processbar_title> 사다리를 얼마나 올랐을까... </h1>
 			<div id=right_project_processbar>
 				<?php
 					for($i=0;$i<$percentage;$i++) {

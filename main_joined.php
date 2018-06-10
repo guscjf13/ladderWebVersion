@@ -71,7 +71,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		}
 		#right_project_board {
 			border-radius: 50px;
-			height: 210px;
+			height: 200px;
 			background-color: #CEF279;
 			margin:100px 25px 25px 0;
 		}
@@ -149,7 +149,8 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		</div>
 
 		<div id=right_menu>
-		 <a href=# onClick="window.open('message.php?index=<?php echo $index?>','window_name','width=550,height=600,location=no,status=no,scrollbars=no')" id="message_img" style="margin-left: 30px; margin-right: 10px"><img src=message.png style="width: 40px; height: 40px;"></a>
+		 <a href=# onClick="window.open('message.php?index=<?php echo $index?>','window_name','width=550,height=600,location=no,status=no,scrollbars=no')" id="message_img" 
+		 	style="float: right; margin-right: 100px; margin-top: 30px;"><img src=message.png style="width: 50px; height: 50px;"></a>
 			<?php
 				make_processbar(56);
 				make_error_card($index);	//파라미터로 현재 프로젝트 번호 넘겨줘야함
