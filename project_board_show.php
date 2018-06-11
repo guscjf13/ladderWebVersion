@@ -1,6 +1,28 @@
 <?php
 	if(!isset($_SESSION)){session_start();}
 	include("db.php");
+	$index = $_REQUEST['index'];
+
+	            	$wincrease_path="/project/".$index."/things/increase";
+            	$wincrease = $firebase->get($wincrease_path);
+                $z = 1;
+                $percentage = 0;
+            	$done = 0;
+            	$issue = 0;
+
+            	while($wincrease >= $z){
+                	$cal_path="/project/".$index."/things/".$z."/state";
+                	$cal = $firebase->get($cal_path);
+                	if($cal == null){
+                	}elseif($cal == 3){
+                		$done++;
+                	}elseif($cal == 2){
+                		$issue++;
+                	}
+                	$z++;
+            	}
+            	$percentage = ($done*100/$wincrease) - ($issue*5);
+            	$percentage %= 100;
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +68,7 @@
 	<h1 style="text-align: center;">프로젝트 게시판 세부내용</h1>
 
 	<?php
-	make_processbar(72);
+	make_processbar($percentage);
 	?>
 
 	<div id=content_left>

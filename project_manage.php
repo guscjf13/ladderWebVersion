@@ -73,21 +73,24 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
       #right_menu2 {
          width: 1500px;
          height: 260px;
-         background-color: black;         
+         border-radius: 30px 30px 0 0;
+         background-color: #A6A6A6;         
       }
       #right_menu3 {
          width: 1500px;
          height: 260px;
-         background-color: green;         
+         border-radius: 0 0 30px 30px;
+         background-color: #B7F0B1;         
       }
 
       </style>
    </head>
 
    <body>
-      <?php 
-         include "top_menu.php";
+      <?php
          include "db.php";
+         include "top_menu.php";
+         
       
          $index = $_REQUEST['index'];
          $path = "/check/signup/".$index."/id/";
@@ -189,8 +192,9 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                </tr>
             </table>
 
-            <form style="float: right; height: 100px;" action="project_invite_end.php" method="post">
-               <input style="width: 120px; text-align: center; height: 30px; margin: 35px 10px 35px 30px;" type=text name=invite_ID>
+            <form style="float: right; height: 100px;" action="project_invite.php" method="post">
+               <input style="width: 120px; text-align: center; height: 30px; margin: 35px 10px 35px 30px;" type=text name=invite_id>
+               <input style="display: none;"id=index name=index value=<?php echo $index;?>>
                <input style="width: 80px; height: 40px; margin: 30px 150px 0 0;"  type=submit value="초대">
             </form>
 

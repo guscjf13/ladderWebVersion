@@ -28,9 +28,6 @@
 
 		$user_count_path = "/user/".$_SESSION['id']."/project/count";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
 		$user_increase_path = "/user/".$_SESSION['id']."/project/increase";
-		$user_isLeader_path = "/user/".$_SESSION['id']."/project/".$index."/isLeader";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
-		$user_pname_path = "/user/".$_SESSION['id']."/project/".$index."/pname";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
-		$user_index_path = "/user/".$_SESSION['id']."/project/".$index."/index";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
 
 		$user_count = $firebase->get($user_count_path);
 		$user_increase = $firebase->get($user_increase_path);
@@ -38,6 +35,13 @@
 		$user_increase++;
 		$firebase->set($user_count_path,$user_count);
 		$firebase->set($user_increase_path,$user_increase);
+
+
+		$user_isLeader_path = "/user/".$_SESSION['id']."/project/".$user_increase."/isLeader";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_pname_path = "/user/".$_SESSION['id']."/project/".$user_increase."/pname";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+		$user_index_path = "/user/".$_SESSION['id']."/project/".$user_increase."/index";	//test1 대신 세션이나 그런걸로해서 현재 사용자 아이디
+
+
 
 		$firebase->set($user_isLeader_path, true);
 		$firebase->set($user_pname_path, $pname);
@@ -59,6 +63,7 @@
 		$leader_path = "/project/".$index."/pInfo/leader";
 		$status_path = "/project/".$index."/pInfo/status";
 		$index_path = "/project/".$index."/pInfo/index";
+		$wincrease_path = "/project/".$index."/things/increase";
 			
 		$firebase->set($pname_path, $pname);
 		$firebase->set($goal_path, $goal);
@@ -70,6 +75,7 @@
 		$firebase->set($leader_path, $_SESSION['id']);	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
 		$firebase->set($status_path, "모집중");
 		$firebase->set($index_path, $index);
+		$firebase->set($wincrease_path, 0);
 
 		$check_path = "/check/signup/".$index."/leader";
 		$firebase->set($check_path, $_SESSION['id']);
