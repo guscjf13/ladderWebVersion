@@ -6,6 +6,7 @@
 			height: 30px;
 			border: 3px solid black;
 			background-color: #FFFFFF;
+			border-radius: 5px;
 			margin:25px 25px 25px 0;
 			line-height: 30px;
 			font-size: 20px;
@@ -13,6 +14,23 @@
 		.right_project_processbar_1percentage {
 			width: 14px;
 			height: 30px;
+			margin-left: 1px;
+			background-color: #00D8FF;
+			float: left;
+		}
+		#small_processbar {
+			width: 141px;
+			height: 18px;
+			border: 2px solid black;
+			border-radius: 5px;
+			background-color: #FFFFFF;
+			line-height: 18px;
+			font-size: 15px;
+		}
+		.small_processbar_1percentage {
+			position: relative;
+			width: 13px;
+			height: 18px;
 			margin-left: 1px;
 			background-color: #00D8FF;
 			float: left;
@@ -80,17 +98,90 @@
 			//id, password 파이어베이스랑 검사해서 일치하면 name에 사용자의 이름 넣어주면서 true 반환, id, password 틀리면 false 반환
 		}
 
-		function make_processbar($percentage)
+		function make_processbar($index)
 		{
+				global $firebase;
+			    $wincrease_path="/project/".$index."/things/increase";
+            	$wincrease = $firebase->get($wincrease_path);
+                $z = 1;
+                $percentage = 0;
+            	$done = 0;
+            	$issue = 0;
+
+            	while($wincrease >= $z){
+                	$cal_path="/project/".$index."/things/".$z."/state";
+                	$cal = $firebase->get($cal_path);
+                	if($cal == null){
+                	}elseif($cal == 3){
+                		$done++;
+                	}elseif($cal == 2){
+                		$issue++;
+                	}
+                	$z++;
+            	}
+            	$percentage = ($done*100/$wincrease) - ($issue*5);
+            	$percentage %= 100;
 			?>
 			
-			<h1> 사다리를 얼마나 올랐을까... </h1>
+			<h1 id=processbar_title> 사다리를 얼마나 올랐을까... </h1>
 			<div id=right_project_processbar>
 				<?php
 					for($i=0;$i<$percentage;$i++) {
 						?> <div class=right_project_processbar_1percentage> </div> <?php
 					}
-					echo "　$percentage%";
+					if($percentage<= 96){
+						echo "　$percentage%";
+					}else{
+						?><div style="position: absolute; right: 6%;left: 94%;"><?php echo "$percentage%";?></div><?php
+					}
+					
+				?>
+			</div>
+
+			<?php
+		}
+		function make_smallbar($index)
+		{
+				global $firebase;
+			    $wincrease_path="/project/".$index."/things/increase";
+            	$wincrease = $firebase->get($wincrease_path);
+                $z = 1;
+                $percentage = 0;
+            	$done = 0;
+            	$issue = 0;
+
+            	while($wincrease >= $z){
+                	$cal_path="/project/".$index."/things/".$z."/state";
+                	$cal = $firebase->get($cal_path);
+                	if($cal == null){
+                	}elseif($cal == 3){
+                		$done++;
+                	}elseif($cal == 2){
+                		$issue++;
+                	}
+                	$z++;
+            	}
+            	$percentage = ($done*100/$wincrease) - ($issue*5);
+            	$percentage %= 100;
+            	$per = $percentage;
+            	$percentage /= 10;
+            	$percentage %= 10;
+
+			?>
+			
+			<div id=small_processbar>
+				<?php
+					for($i=0;$i<$percentage;$i++) {
+						?> <div class=small_processbar_1percentage> </div> <?php
+					}
+					if($percentage==0){
+						echo "0%";
+					}elseif($percentage< 8){
+						echo $per."%";
+					}else{
+						echo $per."%";
+					}
+					
 				?>
 			</div>
 

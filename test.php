@@ -1,8 +1,20 @@
 <?php
+include "db.php";
 
-$leader = "\"test1\"";
-$leader = explode("\"", $leader)[1];
-$invite_id = "test1";
+?>
+<table border="1">
+    <tr>
+        <td>
+            asdasd
+        </td>
+        <td>
+            <?php make_smallbar(1)?>
+        </td>
+    </tr>
 
-echo strcmp($leader,$invite_id);
+</table>
+<?php
+
+make_smallbar(1);
+
 ?>

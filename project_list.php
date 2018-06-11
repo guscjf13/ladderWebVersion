@@ -59,6 +59,7 @@ include "top_menu.php";
                 <th width="100">팀장</th>
                 <th width="200">기간</th>
                 <th width="80">상태</th>
+                <th width="140">진행상황</th>
             </tr>
         </thead>
     
@@ -109,7 +110,8 @@ include "top_menu.php";
             <td width="80"><?php echo $nump; ?>/<?php echo $maxp; ?></td>
             <td width="100"><?php echo $leader; ?></td>
             <td width="200"><?php echo $begin; ?>&nbsp~&nbsp<?php echo $dead; ?></td>
-            <td width="100"><?php echo $status; ?></td>
+            <td width="80"><?php echo $status; ?></td>
+            <td width="140"><?php make_smallbar($index);?></td>
         </tr>
 	</tbody>
     <?php
@@ -147,6 +149,7 @@ if($flag == false){?>
                 <th width="60">번호</th>
                 <th width="150">프로젝트 이름</th>
                 <th width="100">팀장</th>
+                <th width="140">진행상황</th>
             </tr>
         </thead>
         <?php
@@ -170,6 +173,7 @@ if($flag == false){?>
             <td width="60"><?php echo $m; ?></td>
             <td width="150"><?php echo $ipname; ?></td>   <!--REQUEST 로 선택한 글 프로젝트 $index를 넘겨준다.-->
             <td width="100"><?php echo $ileader; ?></td>
+            <td width="140"><?php make_smallbar($index);?></td>
             <td width="60"><a href="project_invite_admit.php?index=<?php echo $m;?>"><button>수락</button></a></td>
             <td width="60"><a href="project_invite_reject.php?index=<?php echo $m;?>"><button>거절</button></a></td>
         </tr>
