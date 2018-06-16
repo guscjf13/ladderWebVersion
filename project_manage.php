@@ -72,16 +72,40 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
       }
       #right_menu2 {
          width: 1500px;
-         height: 260px;
-         border-radius: 30px 30px 0 0;
-         background-color: #A6A6A6;         
+         height: 520px;
+         border-radius: 30px 30px 30px 30px;
+         background-color: #EAEAEA;         
       }
-      #right_menu3 {
+      /*#board_area {margin:50px; height: 535px;}*/
+            .list-table {
+                margin-bottom: 20px;
+            }
+            .list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
+            .list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
+            #main_head {
+                text-align: center;
+            }
+            table {
+                margin: auto;
+            }
+            #make_project{
+                width: 150px;
+                height: 40px;
+                border: 3px solid black;
+                background-image: url('make_project.png');
+                background-size: cover;
+                margin-right: 330px;
+                float: right;
+            }
+            #make_project:hover {
+                background-image: url('make_project_hover.png');
+            }
+/*      #right_menu3 {
          width: 1500px;
          height: 260px;
          border-radius: 0 0 30px 30px;
          background-color: #B7F0B1;         
-      }
+      }*/
 
       </style>
    </head>
@@ -143,7 +167,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                   <table border=0 style="width: 200px; height: 340px; border-collapse: collapse;">
                      <tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
                         <th style="width: 100px;"><h2 style="line-height: 60px;">팀장</h2></th>
-                        <td style="width: 140px;"><input style="width: 100px; height: 40px; text-align: center; font-size: 18px;" type=text name=leader value=<?php echo $leader?>></td>
+                        <td style="width: 140px;"><input style="width: 100px; height: 40px; text-align: center; font-size: 18px;" type=button name=leader value=<?php echo $leader?>></td>
                      </tr>
                      <tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
                         <th><h2>목표</h2></th>
@@ -184,11 +208,18 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                      while($array[$i] != null){
                         $sign_id = explode("\"",$array[$i])[1];
                         $i++;
+                        $vvv_path = "/check/signup/".$index."/id/".$sign_id;
+                        $vvv = $firebase->get($vvv_path);
+                        if($vvv == 1){
+                        
                   ?>
                   <td class=applicant style = "width: 100px; height: 50px; text-align:center; font-size: 25px; cursor:pointer; border-radius: 20px;" onClick = " location.href='signup_admit.php?index=<?php echo $index;?>&sign_id=<?php echo $sign_id;?>' " onMouseOver = " window.status = 'signup_admit.php?index=<?php echo $index;?>&sign_id=<?php echo $sign_id;?>' " onMouseOut = " window.status = '' ">
                            <?php echo $sign_id;?>
                         </td>
-                  <?php }?>
+                  <?php
+                        }
+                     }
+                  ?>
                </tr>
             </table>
 
@@ -203,9 +234,107 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
          </div>
 
          <div id=right_menu2>
+            <h3 id=main_head>팀원 관리</h3>
+
+        <div id="board_area"> 
+
+            <table class="list-table">
+                <thead>
+                    <tr>
+                        <th width="60">번호</th>
+                        <th width="100">아이디</th>
+                        <th width="400">담당 일감</th>
+                        <th width="140">진행상황</th>
+                        <th width="80">상태</th>
+                        <th width="60">방출</th>
+                    </tr>
+                </thead>
+                
+                <?php
+                    $pmincrease_path="/project/".$index."/member/increase";
+                    $pmincrease = $firebase->get($pmincrease_path);
+                    $i = 1;
+                    while($pmincrease >= $i){
+                        $valid_path="/project/".$index."/member/".$i."/isLeader";
+                        $valid = $firebase->get($valid_path);
+                        if($valid == 'true'){
+                            $i++;
+                        }elseif($pmincrease == $i && $valid == 'null'){
+                           break;
+                        }elseif($pmincrease > $i && $valid == 'null'){
+                           $i++;
+                        }else{
+                            $pmindex = $i;
+                            $pmid_path="/project/".$index."/member/".$i."/id";
+                            $pmwork_path="/project/".$index."/member/".$i."/work";
+
+                            $pmid = $firebase->get($pmid_path);
+                            $pmwork = $firebase->get($pmwork_path);
+                            $pmwork = explode("},\"", $pmwork);
+                            $x = 0;
+                            while($pmwork[$x] != 'null'){
+                              if($x == 0){
+                                 $pmwork[$x] = explode("\"", $pmwork[$x])[1];
+                                 $x++;
+                              }else{
+                                 $pmwork[$x] = explode("\"", $pmwork[$x])[0];
+                                 $x++;
+                              }
+                            }
+
+                            $pmid = explode("\"", $pmid)[1];
+
+                            for($y=0;$y<$x;$y++){
+                              $pmwstate_path="/project/".$index."/member/".$i."/work/".$pmwork[$y]."/state";
+                              $pmwstate[$y] = $firebase->get($pmwstate_path);
+                              if($pmwstate[$y]==1){$pmwork[$y]="<font color='red'> $pmwork[$y]</font>";}
+                              elseif($pmwstate[$y]==2){$pmwork[$y]="<font color='orange'> $pmwork[$y]</font>";}
+                              elseif($pmwstate[$y]==3){$pmwork[$y]="<font color='green'> $pmwork[$y]</font>";}
+                            }
+
+                            $signup_path = "/check/signup/".$i."/id/".$pmid;
+                            $signup = $firebase->get($signup_path);
+
+                        ?>
+                <tbody>
+                    <tr>
+                        <td width="60"><?php echo $pmindex; ?></td>
+                        <td width="100"><?php echo $pmid; ?></td>
+                        <td width="400">
+                           <?php
+                           if($x == 0){ echo "담당 하는 일이 없습니다!";}
+                           else{
+                              for($f=0;$f<$x;$f++){
+                                 echo $pmwork[$f]."&nbsp";
+                              }
+                           }
+                           ?>    
+                        </td>
+                        <td width="140"><?php make_memberbar($index,$pmindex);?></td>
+                        <?php if($signup == 1){?>
+                        <td width="80">신청중</td>
+                        <?php }elseif($signup == 2){?>
+                        <td width="80">초대중</td>
+                        <?php }else{?>
+                        <td width="80">팀원</td>
+                        <td width="60"><a href="fire_member.php?pindex=<?php echo $index;?>&pmindex=<?php echo $pmindex;?>&pmid=<?php echo $pmid;?>"><button>방출</button></a></td>
+                        <?php }?>
+                        
+                    </tr>
+                </tbody>
+                <?php
+                            $i++;
+                        }
+                    }
+                ?>
+            </table>
+        </div>
+            <!-- 여기다가는 팀원들 관리 -->
+            
          </div>
-         <div id=right_menu3>
-         </div>
+<!--          <div id=right_menu3>
+            여기다가는 일감 관리
+         </div> -->
       </div>
 
 

@@ -184,7 +184,10 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 
 			<div id=right_project_board>
 				<h3 id=main_head>TO DO LIST</h3>
-				 <div id="board_area"> 
+				<?php if($id == $leader){?>
+				<input id=doneBtn type=button Onclick="window.open('work_manage.php?index=<?php echo $index;?>','window_name','width=700,height=800,location=no,status=no,scrollbars=no')" id="message_img" style="" value="관리">
+				<?php }?>
+	<div id="board_area"> 
     <table class="list-table">
     	<thead>
         	<tr>

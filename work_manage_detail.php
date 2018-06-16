@@ -67,28 +67,53 @@ if(!isset($_SESSION)) {session_start();}
         	<div id=message_logo style="background-image: url('finding.png');"></div>
         	<?php }?>
 	
-
-	<table boder="0" style="margin: 0 auto; width: 350px; border-collapse: collapse;">
+    <form id=message_form action="work_edit.php" method="post">
+	<table boder="0" style="margin: 0 auto; width: 400px; border-collapse: collapse;">
 		<tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
 			<th><h3>담당자</h3></th>
-			<th><?php echo $id?></th>
+			<th>
+				<select id=mid name=mid>
+					<?php
+						$i=1;
+						?>
+						<option value=0>지정안함</option>
+						<?php
+						do{
+							$rid_path="/project/".$pindex."/member/".$i."/id";
+							$r_id=$firebase->get($rid_path);
+							$r = explode("\"",$r_id)[1];
+							?><option value=<?php echo $r_id;?>><?php echo $r;?></option><?php 
+							$i++;
+							$m_path="/project/".$pindex."/member/".$i;
+							$m=$firebase->get($m_path);
+						}while($m!="null");
+					?>
+				</select>
+			</th>
 		</tr>
 		<tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
 			<th><h3>기간</h3></th>
-			<th><?php echo $begin?>&nbsp~&nbsp<?php echo $dead?></th>
+			<th><?php echo $begin?>&nbsp~&nbsp<input id=deadline type=date name=deadline style="width: 200px; text-align:center; margin-left: 10px" value="<?php echo $dead?>"></th>
 		</tr>
 		<tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
 			<th><h3>제목</h3></th>
-			<th><?php echo $wname?></th>
+			<th><input id=wtitle name=wtitle type=text value="<?php echo $wname?>"></th>
 		</tr>
 		<tr style="height: 200px; border-bottom: 2px dotted #BDBDBD;">
 			<th><h3>내용</h3></th>
-			<th><?php echo $content?></th>
+			<th><input type=textarea  id=wcontent name=wcontent  rows=9 cols=20 value="<?php echo $content?>"/></th>
 		</tr>
+		<input type="hidden" name="pindex" value="<?php echo $pindex?>">
+		<input type="hidden" name="windex" value="<?php echo $windex?>">
+		<input type="hidden" name="realwname" value="<?php echo $wname?>">
+		<input type="hidden" name="beginline" value="<?php echo $begin?>">
+		<input type="hidden" name="state" value="<?php echo $state?>">
+		<input type="hidden" name="realid" value="<?php echo $wid?>">
 	</table>
-	<?php if($id==$wid){?>
-	<input id=doneBtn type=button Onclick="location.replace('work_done.php?pindex=<?php echo $pindex?>&windex=<?php echo $windex?>');" value="완료">
-	<?php }?>
+	<input type=submit value="수정">
+	<input id=backBtn type=button Onclick="history.back();">
+	<input id="" type=button Onclick="location.replace('work_delete.php?pindex=<?php echo $pindex?>&windex=<?php echo $windex?>&wid=<?php echo $wid?>')" value="삭제">
+	</form>
 
 </body>
 

@@ -8,6 +8,6 @@
 
 	$firebase->set($path, 1);
 
-	?><script>alert("신청 완료!")
-	location.reload()</script><?php
+	?><script>alert("신청 완료!");
+	history.back();</script><?php
 ?>

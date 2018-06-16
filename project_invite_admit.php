@@ -3,7 +3,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 include "db.php";
 
 $sign_id = $_SESSION['id'];
-$index = $_REQUEST['index'];
+(int)$index = $_REQUEST['index'];
 $path = "/check/signup/".$index."/id/".$sign_id;
 
 $pincrease_path = "/project/".$index."/member/increase";
@@ -43,13 +43,12 @@ if($nump >= $maxp){
 	$firebase->set($new_id_path, $sign_id);
 	$firebase->set($new_isLeader_path, false);
 	$firebase->set($nump_path, $nump);
-	$firebase->set($user_path1, $index);
 	$firebase->set($user_path2, false);
 	$firebase->set($user_path3, $pname);
 	$firebase->set($ucount_path, $ucount);
 	$firebase->set($uincrease_path, $uincrease);
 	$firebase->set($pincrease_path, $pincrease);
-	$firebase->set();
+	$firebase->set($user_path1, (int)$index);
 	if($nump == $maxp){
 		$firebase->set($status_path, "꽉참");
 	}

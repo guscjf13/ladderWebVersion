@@ -187,6 +187,64 @@
 
 			<?php
 		}
+				function make_memberbar($pindex,$pmindex)
+		{
+				global $firebase;
+                $pmwork_path="/project/".$index."/member/".$i."/work";
+
+                $pmwork = $firebase->get($pmwork_path);
+                $pmwork = explode("},\"", $pmwork);
+                $x = 0;
+                $percentage = 0;
+            	$done = 0;
+            	$issue = 0;
+                while($pmwork[$x] != 'null'){
+                	if($x == 0){
+                		$pmwork[$x] = explode("\"", $pmwork[$x])[1];
+                		$x++;
+                	}else{
+                		$pmwork[$x] = explode("\"", $pmwork[$x])[0];
+                		$x++;
+                	}
+                }
+
+                $pmid = explode("\"", $pmid)[1];
+
+                for($y=0;$y<$x;$y++){
+                	$pmwstate_path="/project/".$index."/member/".$i."/work/".$pmwork[$y]."/state";
+                	$pmwstate[$y] = $firebase->get($pmwstate_path);
+                	if($pmwstate[$y]==3){$done++;}
+                	elseif($pmwstate[$y]==2){$issue++;}
+                }
+                if($x != 0){
+            		$percentage = ($done*100/$x) - ($issue*5);
+            		$percentage %= 100;
+            		$per = $percentage;
+            		$percentage /= 10;
+            		$percentage %= 10;
+                }
+
+
+			?>
+			
+			<div id=small_processbar>
+				<?php
+					for($i=0;$i<$percentage;$i++) {
+						?> <div class=small_processbar_1percentage> </div> <?php
+					}
+					if($percentage==0){
+						echo "0%";
+					}elseif($percentage< 8){
+						echo $per."%";
+					}else{
+						echo $per."%";
+					}
+					
+				?>
+			</div>
+
+			<?php
+		}
 
 		function make_error_card($project_index)
 		{
