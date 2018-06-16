@@ -139,7 +139,7 @@
             	}
             	$percentage = ($done*100/$wincrease) - ($issue*5);
             	$percentage %= 100;
-            	if($percentage<=0){$percentage=0};
+            	if($percentage<=0){$percentage=0;}
 			?>
 			
 			<h1 id=processbar_title> 사다리를 얼마나 올랐을까... </h1>
@@ -182,7 +182,7 @@
             	}
             	$percentage = ($done*100/$wincrease) - ($issue*5);
             	$percentage %= 100;
-            	if($percentage<=0){$percentage=0};
+            	if($percentage<=0){$percentage=0;}
             	$per = $percentage;
             	$percentage /= 10;
             	$percentage %= 10;
@@ -239,7 +239,7 @@
                 if($x != 0){
             		$percentage = ($done*100/$x) - ($issue*5);
             		$percentage %= 100;
-            		if($percentage<=0){$percentage=0};
+            		if($percentage<=0){$percentage=0;}
             		$per = $percentage;
             		$percentage /= 10;
             		$percentage %= 10;
