@@ -45,23 +45,37 @@ $index = $_REQUEST['index'];
             font-size: 50px;
             text-align: center;
         }
-  #board_area {margin:5px auto; background-color: white; border-radius: 50px;}
-  #invite_area {margin:50px auto; height: 50px;}
-  .list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
-  .list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
-  #main_head {
-    margin: 0px auto 0px auto;
-    text-align: center;
-  }
-  table {
-    margin: 0px auto;
-  }
+        #board_area {margin:5px auto; background-color: white; border-radius: 50px;}
+        #invite_area {margin:50px auto; height: 50px;}
+        .list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
+        .list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
+        #main_head {
+            margin: 0px auto 0px auto;
+            text-align: center;
+        }
+        table {
+            margin: 0px auto;
+        }
+        #doneBtn {
+            width: 150px;
+            height: 50px;
+            margin-top: 20px;
+            margin-right: 30px;
+            float: right;
+            border-style: none;
+            border: 0;
+            background-size: cover;
+            background-image: url('add_work.png');
+        }
+        #doneBtn:hover {
+            background-image: url('add_work_hover.png');
+            cursor: pointer;
+        }
 	</style>
 </head>
 
 <body>
-	<h3 id=main_head>일감 관리</h3>
-	<input id=doneBtn type=button Onclick="location.replace('work_add.php?pindex=<?php echo $index?>');" value="추가">
+	<h1 id=main_head style="margin: 20px 0 40px 0;">일감 관리</h1>
 	<div id="board_area"> 
     <table class="list-table">
     	<thead>
@@ -131,6 +145,12 @@ $index = $_REQUEST['index'];
         }
     ?>
     </table>
+
+    
+
+    <a href="work_add.php?pindex=<?php echo $index?>">
+        <input id=doneBtn type=button Onclick="location.replace('work_add.php?pindex=<?php echo $index?>');" value="">
+    </a>
 
  </div>
 

@@ -5,23 +5,26 @@ if(!isset($_SESSION)) {session_start();}
 <html>
 		<meta charset="UTF-8" \>
 		<style>
+		h1 {
+			text-align: center;
+		}
 		@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 		a {
 			text-decoration: none;
 			color: black;
 		}
 		#sendBtn {
-			margin: 20px 20px 20px 140px;
+			margin: 20px 20px 20px 220px;
 			width: 100px;
 			height: 50px;
 			border: 0;
 			border-style: none;
-			background-image: url('send_message_small.png');
+			background-image: url('add_work_small.png');
 			background-size: cover;
 			float: left;
 		}
 		#sendBtn:hover {
-			background-image: url('send_message_small_hover.png');
+			background-image: url('add_work_small_hover.png');
 			cursor: pointer;
 		}
 		#backBtn {
@@ -42,7 +45,7 @@ if(!isset($_SESSION)) {session_start();}
 	</head>
 
 	<body>
-		<h2>일감 추가</h2>
+		<h1>일감 추가</h1>
 
 		<?php
 			include "db.php";

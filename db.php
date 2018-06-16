@@ -35,15 +35,33 @@
 			background-color: #00D8FF;
 			float: left;
 		}
+		#right_make_error {
+			margin-right: 80px;
+			border: 0;
+			border-style: none;
+			background-image: url('make_error.png');
+			background-size: cover;
+			width: 120px;
+			height: 40px;
+			margin-top:10px;
+			float: right;
+		}
+		#right_make_error:hover {
+			background-image: url('make_error_hover.png');
+			cursor: pointer;
+			float: right;
+		}
 		#error_card_total {
-			width: 1550px;
-			height: 300px;
-			margin:25px 25px 25px 0;
+			width: 600px;
+			height: 600px;
+			margin:0 0px 25px 50px;
+			float: left;
 		}
 		#error_detail_total {
-			width: 1550px;
-			height: 300px;
-			margin:25px 25px 25px 0;
+			width: 600px;
+			height: 600px;
+			margin:0 0px 25px 50px;
+			float: left;
 		}
 		#error_card {
 			width: 249px;
@@ -174,7 +192,7 @@
 					for($i=0;$i<$percentage;$i++) {
 						?> <div class=small_processbar_1percentage> </div> <?php
 					}
-					if($percentage==0){
+					if($per==0){
 						echo "0%";
 					}elseif($percentage< 8){
 						echo $per."%";
@@ -187,7 +205,7 @@
 
 			<?php
 		}
-				function make_memberbar($pindex,$pmindex)
+		function make_memberbar($pindex,$pmindex)
 		{
 				global $firebase;
                 $pmwork_path="/project/".$index."/member/".$i."/work";
@@ -232,7 +250,7 @@
 					for($i=0;$i<$percentage;$i++) {
 						?> <div class=small_processbar_1percentage> </div> <?php
 					}
-					if($percentage==0){
+					if($per==0){
 						echo "0%";
 					}elseif($percentage< 8){
 						echo $per."%";
@@ -259,8 +277,13 @@
 
             <section class=tab_error>
 
-				<div id=error_card_total> 
-            		<label for=error_card_radio> 
+				<div id=error_card_total style="float: left;"> 
+            		<label for=error_card_radio style="float: left; margin-top:0"> 
+
+		            	<div>
+		            		<h1 style="width: 130px; float: left; margin: 10px 0 0 215px; font-size:30px;"> 오류카드 </h1>
+							<a href=make_error.php id=right_make_error class=top_sub></a> 
+		            	</div>
 						<!-- 여기서 for문으로 오류 개수만큼 만들기-->
 						<?php
 						// 이거 만들 때 radio 하나씩 만들어주고 value로 issue index 넘겨주면 그에 해당하는 세부사항 볼 수 있을거같은데?!
@@ -289,7 +312,7 @@
 							$status = explode("\"", $status)[1];
 							?>
 
-						<div id=error_card>
+						<div id=error_card style="margin-top:15px;">
 							<table style="border-style: none; width:249px;">
 								<tr style="height:100px;">
 									<th>
@@ -332,7 +355,6 @@
 					</label>
 				</div>
 
-            	<label for=error_detail_radio>
             		<?php
             		$iname_path = "/project/".$index."/issue/".$i."/iname";
             		$urgency_path = "/project/".$index."/issue/".$i."/urgency";
@@ -357,8 +379,15 @@
             		$info = explode("\"", $info);
             		$status = explode("\"", $status);
             		?>
-					<div id=error_detail_total>
-						<table border="1" style="border: black; border-collapse: collapse; width:260px;">
+					<div id=error_detail_total style="float: left;">
+            			<label for=error_detail_radio style="float: left;">
+
+		            	<div>
+		            		<h1 style="width: 130px; float: left; margin: 10px 0 0 215px; font-size:30px;"> 오류카드 </h1>
+							<a href=make_error.php id=right_make_error class=top_sub></a> 
+		            	</div>
+
+							<table border="1" style="border: black; border-collapse: collapse; width:260px; margin-top:5px;">
 								<tr style="height:50px">
 									<th>
 										<!-- <pre> 컴파일 오류 </pre>  -->
@@ -390,8 +419,8 @@
 									</th>
 								</tr>
 							</table>
+            			</label>
 					</div> 
-            	</label>
 
             </section>
 

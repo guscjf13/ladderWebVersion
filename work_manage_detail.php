@@ -12,8 +12,21 @@ if(!isset($_SESSION)) {session_start();}
 			background-size: cover;
 			margin: 5px auto;
 		}
+		#modifyBtn {
+			margin: 20px 0 0 170px;
+			width: 100px;
+			height: 50px;
+			border: 0;
+			border-style: none;
+			background-image: url('modify.png');
+			background-size: cover;
+		}
+		#modifyBtn:hover {
+			background-image: url('modify_hover.png');
+			cursor: pointer;
+		}
 		#backBtn {
-			margin: 20px 0 0 210px;
+			margin: 20px 0 0 20px;
 			width: 100px;
 			height: 50px;
 			border: 0;
@@ -23,6 +36,19 @@ if(!isset($_SESSION)) {session_start();}
 		}
 		#backBtn:hover {
 			background-image: url('back_hover.png');
+			cursor: pointer;
+		}
+		#deleteBtn {
+			margin: 20px 0 0 20px;
+			width: 100px;
+			height: 50px;
+			border: 0;
+			border-style: none;	
+			background-image: url('delete.png');
+			background-size: cover;	
+		}
+		#deleteBtn:hover {
+			background-image: url('delete_hover.png');
 			cursor: pointer;
 		}
 	</style>
@@ -110,9 +136,9 @@ if(!isset($_SESSION)) {session_start();}
 		<input type="hidden" name="state" value="<?php echo $state?>">
 		<input type="hidden" name="realid" value="<?php echo $wid?>">
 	</table>
-	<input type=submit value="수정">
+	<input id=modifyBtn type=submit value="">
 	<input id=backBtn type=button Onclick="history.back();">
-	<input id="" type=button Onclick="location.replace('work_delete.php?pindex=<?php echo $pindex?>&windex=<?php echo $windex?>&wid=<?php echo $wid?>')" value="삭제">
+	<input id="deleteBtn" type=button Onclick="location.replace('work_delete.php?pindex=<?php echo $pindex?>&windex=<?php echo $windex?>&wid=<?php echo $wid?>')" value="">
 	</form>
 
 </body>
