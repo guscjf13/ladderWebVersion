@@ -114,7 +114,7 @@ if(!isset($_SESSION)){session_start();}	//세션이 있으면 넘어가고 없�
 		<br>
 
 		<input id=submit type=submit value="오류 등록" style="margin-bottom: 20px;">
-		<a href=main_joined.php> <div id=backBtn> 뒤로 가기 </div> </a>
+		<input id=backBtn type=button Onclick="history.back();" value="뒤로 가기">
 		<?php
 			include "footer.php";
 		?>
