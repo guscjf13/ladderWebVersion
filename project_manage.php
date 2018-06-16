@@ -167,7 +167,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                   <table border=0 style="width: 200px; height: 340px; border-collapse: collapse;">
                      <tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
                         <th style="width: 100px;"><h2 style="line-height: 60px;">팀장</h2></th>
-                        <td style="width: 140px;"><input style="width: 100px; height: 40px; text-align: center; font-size: 18px;" type=button name=leader value=<?php echo $leader?>></td>
+                        <td style="width: 140px;"><h3 style="width: 100px; height: 40px; line-height: 40px; text-align: center; font-size: 18px;"><?php echo $leader?></h3></td>
                      </tr>
                      <tr style="height: 60px; border-bottom: 2px dotted #BDBDBD;">
                         <th><h2>목표</h2></th>
@@ -186,6 +186,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                         </td>
                      </tr>
                   </table>
+                      <input type="hidden" name="index" value="<?php echo $index?>">
 
                   <input style="float: left; width: 80px; height: 40px;" type=submit value="바꾸기">
                   <a style="float: left;" href=main_joined.php?index=<?php echo $index?>> <div id=left_project_manage></div> </a>
