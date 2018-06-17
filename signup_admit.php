@@ -49,7 +49,7 @@ if($nump >= $maxp){
 	$firebase->set($pincrease_path, $pincrease);
 	$firebase->set($user_path1, (int)$index);
 	if($nump == $maxp){
-		$firebase->set($status_path, "꽉참");
+		$firebase->set($status_path, "마감");
 	}
 	?><script>alert("승인 완료!"); history.back();</script><?php
 }

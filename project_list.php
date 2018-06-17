@@ -26,12 +26,12 @@
             font-size: 50px;
             text-align: center;
         }
-  #board_area {margin:50px auto; height: 510px;}
-  #invite_area {margin:50px auto; height: 50px;}
+  #board_area {margin:50px auto; height: 320px;}
+  #invite_area {margin:10px auto; height: 200px;}
   .list-table thead th{ height:40px; border-top:2px solid #09C; border-bottom:1px solid #CCC; font:bold 17px 'malgun gothic';  }
   .list-table tbody td{ text-align:center; padding:10px 0; border-bottom:1px solid #CCC; height:20px; font: 14px 'malgun gothic';}
   #main_head {
-    margin: 50px auto 0px auto;
+    margin: 10px auto 0px auto;
     text-align: center;
   }
   table {
@@ -173,7 +173,7 @@ if($flag == false){?>
             <td width="60"><?php echo $m; ?></td>
             <td width="150"><?php echo $ipname; ?></td>   <!--REQUEST 로 선택한 글 프로젝트 $index를 넘겨준다.-->
             <td width="100"><?php echo $ileader; ?></td>
-            <td width="140"><?php make_smallbar($index);?></td>
+            <td width="140"><?php make_smallbar($m);?></td>
             <td width="60"><a href="project_invite_admit.php?index=<?php echo $m;?>"><button>수락</button></a></td>
             <td width="60"><a href="project_invite_reject.php?index=<?php echo $m;?>"><button>거절</button></a></td>
         </tr>

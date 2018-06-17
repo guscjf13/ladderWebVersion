@@ -32,10 +32,11 @@
 			}
 
 			#content_right {
-				width: 500px;
+				width: 470px;
 				height: 470px;
 				float:left;
-				background-color: green;
+				border-radius: 200px;
+				background-color: #E4F7BA;
 			}
 		</style>
 	</head>
@@ -119,11 +120,13 @@
 				<th><h2>프로젝트 기간</h2></th><td><?php echo $begin?>&nbsp~&nbsp<?php echo $dead?></td>
 
 				<?php if($signup==1){?>
-					<th><h2>상태</h2></th><td style="text-decoration-color: green;">신청중</td>
+					<th><h2>상태</h2></th><td><font color='orange'>신청중</font></td>
 				<?php }elseif($id == $leader){?>
-					<th><h2>상태</h2></th><td style="text-decoration-color: green;">내가 팀장</td>
+					<th><h2>상태</h2></th><td><font color='blue'>내가 팀장</font></td>
 				<?php }elseif($flag==1){?>
-					<th><h2>상태</h2></th><td style="text-decoration-color: green;">참가중</td>
+					<th><h2>상태</h2></th><td><font color='green'>참가중</font></td>
+				<?php }elseif($status == "마감"){?>
+					<th><h2>상태</h2></th><td><font color='red'><?php echo $status?></font></td>
 				<?php }else{?>
 					<th><h2>상태</h2></th><td><?php echo $status?></td>
 				<?php }?>
@@ -153,6 +156,7 @@
 	</div>
 
 	<div id=content_right>
+		<img src=bulb.png style="width: 300px; height:300px;margin: 85px;">
 	</div>
 
 	<?php include("footer.php");?>

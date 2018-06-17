@@ -273,7 +273,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                             $pmwork = $firebase->get($pmwork_path);
                             $pmwork = explode("},\"", $pmwork);
                             $x = 0;
-                            while($pmwork[$x] != 'null'){
+                            while($pmwork[$x] != null){
                               if($x == 0){
                                  $pmwork[$x] = explode("\"", $pmwork[$x])[1];
                                  $x++;
@@ -284,17 +284,13 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                             }
 
                             $pmid = explode("\"", $pmid)[1];
-
                             for($y=0;$y<$x;$y++){
                               $pmwstate_path="/project/".$index."/member/".$i."/work/".$pmwork[$y]."/state";
-                              $pmwstate[$y] = $firebase->get($pmwstate_path);
-                              if($pmwstate[$y]==1){$pmwork[$y]="<font color='red'> $pmwork[$y]</font>";}
-                              elseif($pmwstate[$y]==2){$pmwork[$y]="<font color='orange'> $pmwork[$y]</font>";}
-                              elseif($pmwstate[$y]==3){$pmwork[$y]="<font color='green'> $pmwork[$y]</font>";}
+                              $pmwstate = $firebase->get($pmwstate_path);
+                              if($pmwstate==1){$pmwork[$y]="<font color='red'> $pmwork[$y]</font>";}
+                              elseif($pmwstate==2){$pmwork[$y]="<font color='orange'> $pmwork[$y]</font>";}
+                              elseif($pmwstate==3){$pmwork[$y]="<font color='green'> $pmwork[$y]</font>";}
                             }
-
-                            $signup_path = "/check/signup/".$i."/id/".$pmid;
-                            $signup = $firebase->get($signup_path);
 
                         ?>
                 <tbody>
@@ -312,14 +308,8 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                            ?>    
                         </td>
                         <td width="140"><?php make_memberbar($index,$pmindex);?></td>
-                        <?php if($signup == 1){?>
-                        <td width="80">신청중</td>
-                        <?php }elseif($signup == 2){?>
-                        <td width="80">초대중</td>
-                        <?php }else{?>
                         <td width="80">팀원</td>
                         <td width="60"><a href="fire_member.php?pindex=<?php echo $index;?>&pmindex=<?php echo $pmindex;?>&pmid=<?php echo $pmid;?>"><button>방출</button></a></td>
-                        <?php }?>
                         
                     </tr>
                 </tbody>
@@ -327,6 +317,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
                             $i++;
                         }
                     }
+
                 ?>
             </table>
         </div>

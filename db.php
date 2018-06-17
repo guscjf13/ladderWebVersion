@@ -210,7 +210,7 @@
 		function make_memberbar($pindex,$pmindex)
 		{
 				global $firebase;
-                $pmwork_path="/project/".$index."/member/".$i."/work";
+                $pmwork_path="/project/".$pindex."/member/".$pmindex."/work";
 
                 $pmwork = $firebase->get($pmwork_path);
                 $pmwork = explode("},\"", $pmwork);
@@ -218,7 +218,7 @@
                 $percentage = 0;
             	$done = 0;
             	$issue = 0;
-                while($pmwork[$x] != 'null'){
+                while($pmwork[$x] != null){
                 	if($x == 0){
                 		$pmwork[$x] = explode("\"", $pmwork[$x])[1];
                 		$x++;
@@ -231,7 +231,7 @@
                 $pmid = explode("\"", $pmid)[1];
 
                 for($y=0;$y<$x;$y++){
-                	$pmwstate_path="/project/".$index."/member/".$i."/work/".$pmwork[$y]."/state";
+                	$pmwstate_path="/project/".$pindex."/member/".$pmindex."/work/".$pmwork[$y]."/state";
                 	$pmwstate[$y] = $firebase->get($pmwstate_path);
                 	if($pmwstate[$y]==3){$done++;}
                 	elseif($pmwstate[$y]==2){$issue++;}

@@ -46,6 +46,7 @@
                 background-image: url('make_project.png');
                 background-size: cover;
                 margin-right: 330px;
+                margin-bottom: 50px;
                 float: right;
             }
             #make_project:hover {
@@ -142,13 +143,15 @@
                         <td width="100"><?php echo $leader; ?></td>
                         <td width="200"><?php echo $begin; ?>&nbsp~&nbsp<?php echo $dead; ?></td>
                         <?php if($signup == 1){?>
-                        <td width="100" style="text-decoration-color: green;">신청중</td>
+                        <td width="100"><font color='orange'>신청중</font></td>
                         <?php }elseif($id == $leader){?>
-                        <td width="100" style="text-decoration-color: green;">내가 팀장</td>
+                        <td width="100"><font color='blue'>내가 팀장</font></td>
                         <?php }elseif($flag == 1){?>
-                        <td width="100" style="text-decoration-color: green;">참가중</td>
+                        <td width="100"><font color='green'>참가중</font></td>
+                        <?php }elseif($status == "마감"){?>
+                        <td width="80"><font color='red'><?php echo $status;?></font></td>
                         <?php }else{?>
-                        <td width="80"><?php echo $status; ?></td>
+                        <td width="80"><?php echo $status;?></td>
                         <?php }?>
                         <td width="140"><?php make_smallbar($index);?></td>
                     </tr>
