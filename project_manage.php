@@ -156,7 +156,7 @@ if(!isset($_SESSION)){session_start();}   //세션이 있으면 넘어가고 없
       <div id=left_menu>
 
          <div id=left_project_logo>
-            <img src=left_project_logo.png style="width: 200px; height:200px; border-radius: 100px;">
+            <img src=bulb.png style="width: 200px; height:200px; border-radius: 100px;">
             <h1 style="margin-top: 20px"><?php echo $pname;?></h1>
          </div>
 
