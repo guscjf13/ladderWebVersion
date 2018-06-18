@@ -54,7 +54,9 @@
 		$leader_path = "/project/".$index."/pInfo/leader";
 		$status_path = "/project/".$index."/pInfo/status";
 		$index_path = "/project/".$index."/pInfo/index";
+		$wnum_path = "/project/".$index."/pInfo/wnum";
 		$wincrease_path = "/project/".$index."/things/increase";
+		$count_path = "/project/".$index."/issue/count";
 
 		$check_path = "/check/signup/".$index."/leader";
 		$firebase->set($check_path, $_SESSION['id']);
@@ -79,6 +81,8 @@
 		$firebase->set($member_id_path, $_SESSION['id']);	//여기서 세션이나 그런거 써서 현재 사용자정보 받아와야됨
 		$firebase->set($member_isLeader_path, true);
 		$firebase->set($mincrease_path, 1);
+		$firebase->set($wnum_path,0);
+		$firebase->set($count_path,0);
 
 
 
